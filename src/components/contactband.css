@@ -1,0 +1,25 @@
+.contact-band {
+  padding-block: clamp(28px, 4vw, 44px);
+}
+.contact-band-inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: clamp(24px, 4vw, 56px);
+}
+.cb-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.cb-ico { width: 22px; height: 22px; color: var(--gold); flex: none; margin-top: 2px; }
+.cb-item div { display: flex; flex-direction: column; }
+.cb-item strong { font-size: 0.92rem; font-weight: 600; color: var(--text-on-dark); margin-bottom: 3px; }
+.cb-item span,
+.cb-item a { font-size: 0.86rem; color: var(--muted-on-dark); line-height: 1.5; }
+.cb-item a:hover { color: var(--gold); }
+.contact-band .btn { margin-left: auto; }
+
+@media (max-width: 760px) {
+  .contact-band .btn { margin-left: 0; }
+}

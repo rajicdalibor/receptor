@@ -1,0 +1,301 @@
+/* ============================================================
+   Receptor — Riverside Brasserie
+   Design tokens + global styles
+   ============================================================ */
+
+:root {
+  /* Surfaces — warm ivory / cream */
+  --cream: #f4eee2;
+  --cream-deep: #ebe2d0;
+  --cream-card: #f8f3ea;
+
+  /* Ink — deep olive black (never pure black) */
+  --ink: #1c1e16;
+  --ink-soft: #2a2d22;
+
+  /* Greens — soft dark green / deep olive */
+  --green-900: #1d231a;
+  --green-800: #262e22;
+  --green-700: #36402e;
+
+  /* Metals — warm gold + bronze */
+  --gold: #b3894a;
+  --gold-bright: #c9a661;
+  --bronze: #8c6b3c;
+
+  /* Text */
+  --text-on-cream: #2a2d22;
+  --muted-on-cream: #6f6857;
+  --text-on-dark: #f2ecde;
+  --muted-on-dark: rgba(242, 236, 222, 0.66);
+
+  /* Lines */
+  --line-cream: rgba(28, 30, 22, 0.14);
+  --line-dark: rgba(242, 236, 222, 0.16);
+  --line-gold: rgba(179, 137, 74, 0.45);
+
+  /* Type */
+  --serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
+  --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+
+  /* Layout */
+  --container: 1240px;
+  --container-narrow: 980px;
+  --gutter: clamp(20px, 5vw, 48px);
+  --radius: 3px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-fast: 0.25s;
+  --t: 0.45s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--text-on-cream);
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ---------- Typography ---------- */
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.08;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+
+.display {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(3.4rem, 9vw, 7.5rem);
+  line-height: 0.96;
+  letter-spacing: -0.01em;
+}
+
+.h-script {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--gold);
+}
+
+.section-title {
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.04;
+}
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.lead {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  line-height: 1.7;
+  color: var(--muted-on-cream);
+}
+
+p { margin: 0 0 1rem; }
+
+/* ---------- Layout helpers ---------- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.container.narrow {
+  max-width: var(--container-narrow);
+}
+
+.section {
+  padding-block: clamp(64px, 9vw, 130px);
+}
+
+.section.tight {
+  padding-block: clamp(48px, 6vw, 84px);
+}
+
+/* Dark section variant */
+.surface-dark {
+  background: var(--green-900);
+  color: var(--text-on-dark);
+}
+.surface-dark .lead { color: var(--muted-on-dark); }
+.surface-dark .section-title,
+.surface-dark h1,
+.surface-dark h2,
+.surface-dark h3 { color: var(--text-on-dark); }
+
+.surface-deep { background: var(--cream-deep); }
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  font-family: var(--sans);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.95em 1.9em;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: background var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease),
+    transform var(--t-fast) var(--ease);
+  white-space: nowrap;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #fdf8ee;
+  border-color: var(--gold);
+}
+.btn-gold:hover {
+  background: var(--gold-bright);
+  border-color: var(--gold-bright);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-on-cream);
+  border-color: var(--line-cream);
+}
+.btn-outline:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.surface-dark .btn-outline {
+  color: var(--text-on-dark);
+  border-color: var(--line-dark);
+}
+.surface-dark .btn-outline:hover {
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: none;
+  padding-inline: 0;
+  color: var(--gold);
+  letter-spacing: 0.16em;
+}
+.btn-ghost::after {
+  content: "→";
+  transition: transform var(--t-fast) var(--ease);
+}
+.btn-ghost:hover::after { transform: translateX(4px); }
+
+/* ---------- Decorative divider ---------- */
+
+.ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--gold);
+}
+.ornament::before,
+.ornament::after {
+  content: "";
+  height: 1px;
+  width: 54px;
+  background: var(--line-gold);
+}
+.ornament span { font-size: 0.74rem; letter-spacing: 0.24em; text-transform: uppercase; }
+
+/* ---------- Scroll reveal ---------- */
+
+/* Hidden state is applied only when JS is active (html.js-reveal), so a
+   failed/absent observer never leaves content invisible. */
+.reveal {
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  will-change: opacity, transform;
+}
+html.js-reveal .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+html.js-reveal .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Grid utilities ---------- */
+
+.grid {
+  display: grid;
+  gap: clamp(20px, 3vw, 40px);
+}
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 900px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* App shell so footer sits at the bottom */
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main { flex: 1; display: flex; flex-direction: column; }
+main > * { flex: none; }
+/* Dark page wrappers grow to fill the viewport so the background reaches the footer */
+.page-fill { flex: 1 0 auto; }
