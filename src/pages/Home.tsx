@@ -220,7 +220,7 @@ export default function Home() {
         <iframe
           className="home-map"
           title="Mapa — Receptor"
-          src="https://www.google.com/maps?q=Karadjordjeva%2021%20Beograd&z=15&output=embed"
+          src="https://www.google.com/maps?q=44.81657,20.44984&z=17&output=embed"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
         />

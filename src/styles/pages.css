@@ -674,7 +674,10 @@
 .field textarea { resize: vertical; min-height: 110px; }
 .form .full { grid-column: 1 / -1; }
 .form-success { padding: 16px 18px; background: rgba(179,137,74,0.12); border: 1px solid var(--line-gold); border-radius: var(--radius); color: var(--ink); }
-@media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+.form-error { padding: 14px 16px; background: rgba(180, 60, 60, 0.08); border: 1px solid rgba(180, 60, 60, 0.4); border-radius: var(--radius); color: #7a2a2a; font-size: 0.92rem; }
+.form .btn:disabled { opacity: 0.6; cursor: progress; }
+.form-row-3 { grid-template-columns: 1fr 1fr 1fr; }
+@media (max-width: 540px) { .form-row, .form-row-3 { grid-template-columns: 1fr; } }
 
 .reserve-box {
   background: var(--green-900);
