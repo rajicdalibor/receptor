@@ -35,7 +35,7 @@ export default function Galerija() {
               <IconPin className="gal-parking-ico" />
               <span>{t.kontakt.parking.note}</span>
             </div>
-            <Link to="/kontakt" className="btn btn-gold">
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
               {t.cta.reserve}
             </Link>
           </div>

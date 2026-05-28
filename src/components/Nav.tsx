@@ -86,7 +86,7 @@ export function Nav() {
               </span>
             ))}
           </div>
-          <NavLink to="/kontakt" className="btn btn-gold nav-reserve">
+          <NavLink to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold nav-reserve">
             {t.cta.reserve}
           </NavLink>
           <button
@@ -131,7 +131,7 @@ export function Nav() {
               </span>
             ))}
           </div>
-          <NavLink to="/kontakt" className="btn btn-gold">
+          <NavLink to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
             {t.cta.reserve}
           </NavLink>
         </div>

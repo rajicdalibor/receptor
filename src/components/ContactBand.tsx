@@ -34,7 +34,7 @@ export function ContactBand() {
             {k.phone2 && <a href={tel(k.phone2)}>{k.phone2}</a>}
           </div>
         </div>
-        <Link to="/kontakt" className="btn btn-gold">
+        <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
           {t.cta.reserve}
         </Link>
       </div>

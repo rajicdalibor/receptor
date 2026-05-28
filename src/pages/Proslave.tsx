@@ -48,7 +48,7 @@ export default function Proslave() {
                 <div className="package-media">
                   <img src={img(pkgImages[i])} alt="" loading="lazy" />
                 </div>
-                <Link to="/kontakt" className="btn-ghost package-cta">
+                <Link to="/kontakt" state={{ scrollToForm: true }} className="btn-ghost package-cta">
                   {p.packageCta}
                 </Link>
               </div>

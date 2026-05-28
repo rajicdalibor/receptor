@@ -1,18 +1,38 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
+import { useLocation } from "react-router-dom";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
 import { img } from "../lib/img";
 import { IconPin, IconPhone, IconMail, IconClock } from "../components/icons";
+
+const scrollToForm = () => {
+  document
+    .getElementById("forma")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+};
 
 export default function Kontakt() {
   const { t, lang } = useI18n();
   useReveal([lang]);
   const k = t.kontakt;
   const tel = (n: string) => `tel:${n.replace(/\s/g, "")}`;
+  const location = useLocation();
 
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // When navigated here with { scrollToForm: true } (e.g. from a Rezerviši sto
+  // button anywhere on the site), scroll smoothly down to the form.
+  // Depend on location.key (stable per navigation) so React re-renders don't
+  // cancel the pending scroll.
+  useEffect(() => {
+    const s = location.state as { scrollToForm?: boolean } | null;
+    if (!s?.scrollToForm) return;
+    const t = window.setTimeout(scrollToForm, 120);
+    return () => window.clearTimeout(t);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.key]);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -104,9 +124,14 @@ export default function Kontakt() {
                   </div>
                 </div>
               </div>
-              <a href="#forma" className="btn btn-gold" style={{ marginTop: 28 }}>
+              <button
+                type="button"
+                onClick={scrollToForm}
+                className="btn btn-gold"
+                style={{ marginTop: 28 }}
+              >
                 {t.cta.reserve}
-              </a>
+              </button>
             </div>
 
             <div className="reveal">

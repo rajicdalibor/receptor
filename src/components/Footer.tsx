@@ -54,7 +54,7 @@ export function Footer() {
 
         <div className="footer-col footer-links">
           <h4 className="footer-h">{t.nav.kontakt}</h4>
-          <Link to="/kontakt">{t.footer.reservations}</Link>
+          <Link to="/kontakt" state={{ scrollToForm: true }}>{t.footer.reservations}</Link>
           <a href={tel(k.phone.value)}>{t.cta.callNow}</a>
         </div>
 

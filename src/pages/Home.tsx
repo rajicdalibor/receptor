@@ -30,7 +30,7 @@ export default function Home() {
           <p className="home-hero-script">{h.hero.script}</p>
           <p className="home-hero-sub">{h.hero.sub}</p>
           <div className="home-hero-actions">
-            <Link to="/kontakt" className="btn btn-gold">
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
               {h.hero.ctaPrimary}
             </Link>
             <Link to="/meni" className="btn btn-outline">
@@ -209,7 +209,7 @@ export default function Home() {
           </div>
           <p className="home-loc-parking">{h.location.parking}</p>
           <div className="home-hero-actions">
-            <Link to="/kontakt" className="btn btn-gold">
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
               {h.hero.ctaPrimary}
             </Link>
             <a href={tel} className="btn btn-outline">
@@ -235,13 +235,13 @@ export default function Home() {
           <h2 className="home-h">{h.finalCta.title}</h2>
           <p className="lead">{h.finalCta.text}</p>
           <div className="home-hero-actions center-actions">
-            <Link to="/kontakt" className="btn btn-gold">
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
               {h.finalCta.ctaReserve}
             </Link>
             <a href={tel} className="btn btn-outline">
               {h.finalCta.ctaCall}
             </a>
-            <Link to="/kontakt" className="btn btn-outline">
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-outline">
               {h.finalCta.ctaInquiry}
             </Link>
           </div>
