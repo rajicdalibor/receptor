@@ -27,6 +27,17 @@
   backdrop-filter: blur(10px);
   box-shadow: 0 10px 30px -20px rgba(0, 0, 0, 0.7);
 }
+/* When the mobile menu is open, force the bar to the dark theme so the X
+   burger is visible on a dark bar and the bar blends with the overlay. */
+.nav.nav-open,
+.nav.nav-open.nav-scrolled.nav-light,
+.nav.nav-open.nav-scrolled.nav-dark {
+  background: var(--green-900);
+  color: var(--text-on-dark);
+  border-bottom-color: var(--line-dark);
+  backdrop-filter: none;
+  box-shadow: none;
+}
 
 .nav-inner {
   display: grid;
@@ -34,6 +45,8 @@
   align-items: center;
   gap: 18px;
   min-height: 78px;
+  position: relative;
+  z-index: 2; /* keep the bar (with the X) above the mobile overlay */
 }
 
 /* Logo */
@@ -104,6 +117,7 @@
   display: flex;
   align-items: center;
   gap: 18px;
+  justify-self: end; /* pin to the right edge of the grid column */
 }
 .lang-toggle {
   display: inline-flex;
@@ -146,11 +160,12 @@
   background: none;
   border: none;
   padding: 6px;
+  color: inherit; /* otherwise <button> defaults to UA buttontext (black) */
 }
 .nav-burger span {
   display: block;
-  width: 24px;
-  height: 1.5px;
+  width: 26px;
+  height: 2px;
   background: currentColor;
   transition: transform var(--t-fast) var(--ease), opacity var(--t-fast) var(--ease);
 }
@@ -158,26 +173,32 @@
 .nav-open .nav-burger span:nth-child(2) { opacity: 0; }
 .nav-open .nav-burger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-/* Mobile overlay */
+/* Mobile overlay — full-bleed dark panel below the bar */
 .nav-mobile {
   position: fixed;
-  inset: 78px 0 0 0;
+  inset: 0;
   background: var(--green-900);
   color: var(--text-on-dark);
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 36px;
-  padding: 40px var(--gutter);
+  padding: calc(78px + 40px) var(--gutter) 40px;
+  z-index: 1; /* under .nav-inner (z 2), over page content */
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
   transform: translateY(-8px);
-  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
+  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease),
+    visibility 0s linear var(--t);
 }
 .nav-open .nav-mobile {
   opacity: 1;
+  visibility: visible;
   pointer-events: auto;
   transform: none;
+  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease),
+    visibility 0s linear 0s;
 }
 .nav-mobile-links {
   display: flex;
@@ -202,6 +223,15 @@
   .nav-links { display: none; }
   .nav-burger { display: flex; }
   .nav-reserve { display: none; }
+}
+@media (max-width: 560px) {
+  /* Tighten the bar so the lang switcher + burger can sit flush right */
+  .logo-mark { font-size: 1.3rem; letter-spacing: 0.14em; }
+  .logo-sub { font-size: 0.5rem; letter-spacing: 0.36em; }
+  .nav-actions { gap: 14px; }
+  .lang-toggle { font-size: 0.7rem; }
+  .nav-inner { gap: 12px; min-height: 68px; }
+  .nav-mobile { padding-top: calc(68px + 32px); }
 }
 @media (min-width: 1201px) {
   .nav-mobile { display: none; }
