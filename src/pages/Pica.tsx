@@ -10,7 +10,7 @@ export default function Pica() {
   const cur = t.common.currency;
 
   return (
-    <div className="surface-dark page-fill">
+    <>
       <section className="phero phero-split is-dark phero-dark">
         <div className="phero-text">
           <h1 className="phero-title pica-title">{p.hero.title}</h1>
@@ -50,6 +50,6 @@ export default function Pica() {
       </section>
 
       <ContactBand />
-    </div>
+    </>
   );
 }

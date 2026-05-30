@@ -3,6 +3,7 @@ import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
 import { img, GALLERY } from "../lib/img";
 import { Ornament } from "../components/ui";
+import { ContactBand } from "../components/ContactBand";
 import { IconPin } from "../components/icons";
 
 const tall = new Set([1, 6, 9]);
@@ -13,7 +14,7 @@ export default function Galerija() {
   const g = t.galerija;
 
   return (
-    <div className="surface-dark page-fill">
+    <>
       <section className="section tight" style={{ paddingBottom: 0 }}>
         <div className="container center">
           <Ornament>{g.hero.title}</Ornament>
@@ -41,6 +42,8 @@ export default function Galerija() {
           </div>
         </div>
       </section>
-    </div>
+
+      <ContactBand />
+    </>
   );
 }

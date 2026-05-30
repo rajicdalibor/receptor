@@ -203,7 +203,7 @@ const sr = {
   vino: {
     hero: {
       title: "Vinska karta",
-      sub: "A carefully curated wine selection. Compact. Elegant. Intentional.",
+      sub: "Pažljivo birana selekcija vina. Kompaktna. Elegantna. Sa namerom.",
     },
     philosophyTitle: "Naša vinska filozofija",
     philosophyText:
@@ -254,18 +254,18 @@ const sr = {
   /* --------------------------- KARTA PIĆA -------------------------- */
   pica: {
     hero: {
-      title: "Drink Menu",
-      sub: "A carefully curated drink selection. Clear, balanced and true to Receptor.",
-      intro: "A drink menu designed to feel natural, confident and easy to navigate — with a focused selection that follows the rhythm of the restaurant, from daytime aperitif to evening service.",
+      title: "Karta pića",
+      sub: "Pažljivo birana selekcija pića. Čista, balansirana i u duhu Receptora.",
+      intro: "Karta pića osmišljena da deluje prirodno, sigurno i lako za navigaciju — sa fokusiranom selekcijom koja prati ritam restorana, od dnevnog aperitiva do večernjeg servisa.",
     },
     smallprint: "Cene su izražene u RSD i uključuju PDV.",
     groups: [
-      { title: "Aperitif / Openers", items: [
+      { title: "Aperitivi", items: [
         { name: "Aperol Spritz", vol: "", price: "750" },
         { name: "Hugo Spritz", vol: "", price: "750" },
         { name: "Dry Vermouth & Tonic", vol: "", price: "650" },
       ] },
-      { title: "Cocktails", items: [
+      { title: "Kokteli", items: [
         { name: "Negroni", vol: "", price: "850" },
         { name: "Gin & Tonic", vol: "", price: "750" },
         { name: "Whiskey Sour", vol: "", price: "850" },
@@ -278,17 +278,17 @@ const sr = {
         { name: "Domaće flaširano pivo", vol: "0,33 l", price: "360" },
         { name: "Premium uvozno flaširano pivo", vol: "0,33 l", price: "450" },
       ] },
-      { title: "Whiskey / Whisky", items: [
+      { title: "Viski", items: [
         { name: "Jameson", vol: "", price: "390" },
         { name: "Johnnie Walker Black Label", vol: "", price: "450" },
         { name: "Jack Daniel's Single Barrel", vol: "", price: "750" },
         { name: "Macallan", vol: "", price: "790" },
       ] },
-      { title: "Gin", items: [
+      { title: "Džin", items: [
         { name: "Bombay Sapphire", vol: "", price: "390" },
         { name: "Gin Mare", vol: "", price: "490" },
       ] },
-      { title: "Vodka", items: [
+      { title: "Votka", items: [
         { name: "Finlandia", vol: "", price: "390" },
         { name: "Grey Goose", vol: "", price: "590" },
       ] },
@@ -300,10 +300,10 @@ const sr = {
         { name: "Bacardi Carta Blanca", vol: "", price: "390" },
         { name: "Diplomático Reserva Exclusiva", vol: "", price: "690" },
       ] },
-      { title: "Tequila / Agave", items: [
+      { title: "Tekila / Agava", items: [
         { name: "Jimador Reposado", vol: "", price: "490" },
       ] },
-      { title: "Cognac / Brandy", items: [
+      { title: "Konjak / Brendi", items: [
         { name: "Rémy Martin VSOP", vol: "", price: "790" },
       ] },
       { title: "Digestivi", items: [
@@ -331,7 +331,7 @@ const sr = {
         { name: "Sprite", vol: "0,25 l", price: "350" },
         { name: "Fuse Tea", vol: "0,25 l", price: "350" },
       ] },
-      { title: "Sokovi / Fresh", items: [
+      { title: "Sokovi / Sveže", items: [
         { name: "Sok od pomorandže", vol: "0,25 l", price: "350" },
         { name: "Sok od jabuke", vol: "0,25 l", price: "350" },
         { name: "Sok od kajsije", vol: "0,25 l", price: "350" },
@@ -1211,7 +1211,7 @@ const ru: Dict = {
   vino: {
     hero: {
       title: "Карта вин",
-      sub: "A carefully curated wine selection. Compact. Elegant. Intentional.",
+      sub: "Тщательно отобранная винная карта. Компактная. Элегантная. С намерением.",
     },
     philosophyTitle: "Наша винная философия",
     philosophyText:
@@ -1261,8 +1261,8 @@ const ru: Dict = {
 
   pica: {
     hero: {
-      title: "Drink Menu",
-      sub: "A carefully curated drink selection. Clear, balanced and true to Receptor.",
+      title: "Карта напитков",
+      sub: "Тщательно подобранная карта напитков. Чистая, сбалансированная и в духе Receptor-a.",
       intro: "Карта напитков, созданная, чтобы быть естественной, уверенной и понятной — с продуманной подборкой, которая следует ритму ресторана, от дневного аперитива до вечернего сервиса.",
     },
     smallprint: "Цены указаны в RSD и включают НДС.",

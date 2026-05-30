@@ -4,6 +4,7 @@ import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
 import { img } from "../lib/img";
 import { IconPin, IconPhone, IconMail, IconClock } from "../components/icons";
+import { postReservation } from "../lib/api";
 
 const scrollToForm = () => {
   document
@@ -41,17 +42,22 @@ export default function Kontakt() {
     setSending(true);
     try {
       const data = new FormData(form);
-      const res = await fetch(`https://formsubmit.co/ajax/${k.email.value}`, {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: data,
-      });
-      const json = await res.json().catch(() => ({}));
-      if (json.success === "true" || json.success === true || res.ok) {
+      const date = String(data.get("date") || "");
+      const time = String(data.get("time") || "");
+      const payload = {
+        name: String(data.get("name") || ""),
+        email: String(data.get("email") || ""),
+        phone: String(data.get("phone") || ""),
+        date: time ? `${date} ${time}` : date,
+        persons: Number(data.get("persons") || 0),
+        message: String(data.get("message") || ""),
+      };
+      const result = await postReservation(payload);
+      if (result.success) {
         setSent(true);
         form.reset();
       } else {
-        setError(k.form.error);
+        setError(result.error || k.form.error);
       }
     } catch {
       setError(k.form.error);
@@ -149,32 +155,17 @@ export default function Kontakt() {
       </section>
 
       {/* RESERVATION FORM + PARKING */}
-      <section id="forma" className="section tight" style={{ paddingTop: 0 }}>
+      <section id="forma" className="section tight" style={{ paddingTop: 0, scrollMarginTop: 100 }}>
         <div className="container">
           <div className="contact-grid">
             <form
               id="reservationForm"
               className="form reveal"
-              action={`https://formsubmit.co/${k.email.value}`}
-              method="POST"
               onSubmit={onSubmit}
             >
               <h2 className="home-h" style={{ marginBottom: 8 }}>{k.form.title}</h2>
               {sent && <div className="form-success">{k.form.success}</div>}
               {error && <div className="form-error">{error}</div>}
-
-              {/* FormSubmit configuration (hidden) */}
-              <input type="hidden" name="_subject" value="Nova rezervacija — Receptor Riverside Brasserie" />
-              <input type="hidden" name="_template" value="table" />
-              <input type="hidden" name="_captcha" value="false" />
-              <input
-                type="text"
-                name="_honey"
-                tabIndex={-1}
-                autoComplete="off"
-                style={{ position: "absolute", left: "-9999px", height: 0, width: 0, opacity: 0 }}
-                aria-hidden="true"
-              />
 
               <div className="field full">
                 <label htmlFor="r-name">{k.form.name}</label>

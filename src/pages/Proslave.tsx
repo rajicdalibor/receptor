@@ -1,20 +1,43 @@
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
 import { img } from "../lib/img";
 import { Ornament } from "../components/ui";
 import { ContactBand } from "../components/ContactBand";
+import { useData } from "../lib/data";
+import { langCode } from "../lib/api";
+import type { Lang } from "../i18n/translations";
 
 const pkgImages = ["food-sharing", "food-main", "food-plate"];
 
+// Titles per package slot, per language — matches the old Blade page.
+const TITLES: Record<Lang, string[]> = {
+  sr: ["SET MENI 1", "SET MENI 2", "ŠVEDSKI STO"],
+  en: ["SET MENI 1", "SET MENI 2", "BUFFET"],
+  ru: ["СЕТ-Меню 1", "СЕТ-Меню 2", "ШВЕДСКИЙ СТОЛ"],
+};
+
 export default function Proslave() {
   const { t, lang } = useI18n();
-  useReveal([lang]);
   const p = t.proslave;
+
+  const { celebrations, loading, error } = useData();
+
+  const packages = useMemo(() => {
+    const code = langCode(lang);
+    return celebrations
+      .filter((c) => c.jezik === code)
+      .sort((a, b) => a.id - b.id)
+      .slice(0, TITLES[lang].length);
+  }, [celebrations, lang]);
+
+  const titles = TITLES[lang];
+
+  useReveal([lang, celebrations]);
 
   return (
     <>
-      {/* HERO */}
       <section
         className="phero phero-full phero-dark"
         style={{ backgroundImage: `url(${img("dining-evening")})` }}
@@ -28,36 +51,47 @@ export default function Proslave() {
         </div>
       </section>
 
-      {/* PACKAGES */}
       <section className="section">
         <div className="container">
           <div className="center">
             <Ornament>{p.packagesTitle}</Ornament>
           </div>
-          <div className="packages" style={{ marginTop: "clamp(36px,4vw,56px)" }}>
-            {p.packages.map((pk, i) => (
-              <div className={"package reveal" + (i === 1 ? " feat" : "")} key={pk.name}>
-                <span className="package-name">{pk.name}</span>
-                <span className="package-price">{pk.price}</span>
-                <p className="package-desc">{pk.desc}</p>
-                <ul>
-                  {pk.features.map((f) => (
-                    <li key={f}>{f}</li>
-                  ))}
-                </ul>
-                <div className="package-media">
-                  <img src={img(pkgImages[i])} alt="" loading="lazy" />
+
+          {loading.celebrations && packages.length === 0 && (
+            <p className="menu-note reveal">…</p>
+          )}
+          {error.celebrations && (
+            <p className="menu-note reveal" style={{ color: "var(--c-rust, #c44)" }}>
+              {error.celebrations}
+            </p>
+          )}
+
+          {packages.length > 0 && (
+            <div className="packages" style={{ marginTop: "clamp(36px,4vw,56px)" }}>
+              {packages.map((pk, i) => (
+                <div className={"package reveal" + (i === 1 ? " feat" : "")} key={pk.id}>
+                  <span className="package-name">{titles[i]}</span>
+                  <div
+                    className="package-content"
+                    dangerouslySetInnerHTML={{ __html: (pk.hrana || "") + (pk.pice || "") }}
+                  />
+                  <div className="package-media">
+                    <img src={img(pkgImages[i % pkgImages.length])} alt="" loading="lazy" />
+                  </div>
+                  <Link
+                    to="/kontakt"
+                    state={{ scrollToForm: true }}
+                    className="btn-ghost package-cta"
+                  >
+                    {p.packageCta}
+                  </Link>
                 </div>
-                <Link to="/kontakt" state={{ scrollToForm: true }} className="btn-ghost package-cta">
-                  {p.packageCta}
-                </Link>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* CUSTOM + NOTES */}
       <section className="section tight surface-deep">
         <div className="container">
           <div className="two-col">
@@ -82,7 +116,6 @@ export default function Proslave() {
         </div>
       </section>
 
-      {/* CLOSING */}
       <section className="section tight">
         <div className="container narrow center">
           <Ornament />
