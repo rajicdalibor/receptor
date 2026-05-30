@@ -10,9 +10,13 @@ import {
   IconPin,
   IconClock,
   IconPhone,
+  IconMail,
 } from "../components/icons";
 
 const valueIcons = [IconBriefcase, IconRiver, IconWine, IconUsers];
+
+// Static map URL — Google directions to Karađorđeva 21
+const MAP_URL = "https://www.google.com/maps/place/Karađorđeva+21,+Beograd/@44.81657,20.44984,17z";
 
 export default function Home() {
   const { t, lang } = useI18n();
@@ -33,7 +37,7 @@ export default function Home() {
             <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
               {h.hero.ctaPrimary}
             </Link>
-            <Link to="/meni" className="btn btn-outline">
+            <Link to="/meni" className="btn btn-soft">
               {h.hero.ctaSecondary}
             </Link>
             <a href={tel} className="btn-link">
@@ -85,7 +89,7 @@ export default function Home() {
             })}
           </div>
           <div className="center" style={{ marginTop: "clamp(36px,4vw,52px)" }}>
-            <Link to="/meni" className="btn btn-gold">
+            <Link to="/meni" className="btn btn-dark">
               {h.valuesCta}
             </Link>
           </div>
@@ -102,7 +106,7 @@ export default function Home() {
               <div className="hblock-media">
                 <img src={img("food-sharing")} alt="" loading="lazy" />
               </div>
-              <Link to="/meni" className="btn btn-outline hblock-btn">
+              <Link to="/meni" className="btn btn-dark hblock-btn">
                 {h.blocks.food.cta}
               </Link>
             </article>
@@ -114,10 +118,10 @@ export default function Home() {
                 <img src={img("cocktail-2")} alt="" loading="lazy" />
               </div>
               <div className="hblock-btn hblock-actions">
-                <Link to="/vinska-karta" className="btn btn-outline">
+                <Link to="/vinska-karta" className="btn btn-dark">
                   {h.blocks.drink.ctaWine}
                 </Link>
-                <Link to="/karta-pica" className="btn btn-outline">
+                <Link to="/karta-pica" className="btn btn-dark">
                   {h.blocks.drink.ctaDrinks}
                 </Link>
               </div>
@@ -134,7 +138,7 @@ export default function Home() {
               <div className="hblock-media">
                 <img src={img("food-brunch")} alt="" loading="lazy" />
               </div>
-              <Link to="/business-lunch" className="btn btn-outline hblock-btn">
+              <Link to="/business-lunch" className="btn btn-dark hblock-btn">
                 {h.blocks.business.cta}
               </Link>
             </article>
@@ -154,7 +158,7 @@ export default function Home() {
               </span>
             ))}
           </div>
-          <Link to="/proslave" className="btn btn-gold">
+          <Link to="/proslave" className="btn btn-dark">
             {h.proslaveBlock.cta}
           </Link>
         </div>
@@ -165,7 +169,7 @@ export default function Home() {
           <div className="home-duo-dark-inner">
             <h2 className="home-h">{h.eveningBlock.title}</h2>
             <p className="lead">{h.eveningBlock.text}</p>
-            <Link to="/karta-pica" className="btn btn-outline">
+            <Link to="/karta-pica" className="btn btn-dark">
               {h.eveningBlock.cta}
             </Link>
           </div>
@@ -186,7 +190,7 @@ export default function Home() {
             )}
           </div>
           <div className="center" style={{ marginTop: 34 }}>
-            <Link to="/galerija" className="btn btn-outline">
+            <Link to="/galerija" className="btn btn-dark">
               {h.galleryTeaser.cta}
             </Link>
           </div>
@@ -209,21 +213,29 @@ export default function Home() {
           </div>
           <p className="home-loc-parking">{h.location.parking}</p>
           <div className="home-hero-actions">
-            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
-              {h.hero.ctaPrimary}
-            </Link>
-            <a href={tel} className="btn btn-outline">
+            <a href={tel} className="btn btn-dark">
+              <IconPhone className="btn-ico" />
               {t.cta.callNow}
             </a>
+            <a href={MAP_URL} target="_blank" rel="noopener noreferrer" className="btn btn-dark">
+              <IconPin className="btn-ico" />
+              {t.cta.directions}
+            </a>
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-dark">
+              <IconBriefcase className="btn-ico" />
+              {h.hero.ctaPrimary}
+            </Link>
           </div>
         </div>
-        <iframe
-          className="home-map"
-          title="Mapa — Receptor"
-          src="https://www.google.com/maps?q=44.81657,20.44984&z=17&output=embed"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        />
+        <div className="home-map-wrap">
+          <iframe
+            className="home-map"
+            title="Mapa — Receptor"
+            src="https://www.google.com/maps?q=44.81657,20.44984&z=17&output=embed"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
       </section>
 
       {/* FINAL CTA — dark photo */}
@@ -238,10 +250,12 @@ export default function Home() {
             <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
               {h.finalCta.ctaReserve}
             </Link>
-            <a href={tel} className="btn btn-outline">
+            <a href={tel} className="btn btn-dark">
+              <IconPhone className="btn-ico" />
               {h.finalCta.ctaCall}
             </a>
-            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-outline">
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-dark">
+              <IconMail className="btn-ico" />
               {h.finalCta.ctaInquiry}
             </Link>
           </div>

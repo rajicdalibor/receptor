@@ -136,7 +136,7 @@ export default function Kontakt() {
                 className="btn btn-gold"
                 style={{ marginTop: 28 }}
               >
-                {t.cta.reserve}
+                {k.form.title}
               </button>
             </div>
 

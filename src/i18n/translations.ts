@@ -28,7 +28,7 @@ const sr = {
     businessLunch: "Business lunch",
     sendInquiry: "Pošalji upit",
     callNow: "Pozovi odmah",
-    directions: "Putanja do nas",
+    directions: "Otvori mapu",
   },
 
   common: {
@@ -260,63 +260,63 @@ const sr = {
     },
     smallprint: "Cene su izražene u RSD i uključuju PDV.",
     groups: [
-      { title: "Aperitivi", items: [
+      { title: "Aperitif / Openers", items: [
         { name: "Aperol Spritz", vol: "", price: "750" },
         { name: "Hugo Spritz", vol: "", price: "750" },
         { name: "Dry Vermouth & Tonic", vol: "", price: "650" },
       ] },
-      { title: "Kokteli", items: [
+      { title: "Cocktails", items: [
         { name: "Negroni", vol: "", price: "850" },
         { name: "Gin & Tonic", vol: "", price: "750" },
         { name: "Whiskey Sour", vol: "", price: "850" },
-        { name: "Espresso Martini", vol: "", price: "850" },
-        { name: "French 75", vol: "", price: "850" },
+        { name: "Espresso Martini", vol: "", price: "950" },
+        { name: "French 75", vol: "", price: "950" },
       ] },
       { title: "Pivo", items: [
-        { name: "Točeno domaće", vol: "0,33 l", price: "320" },
-        { name: "Točeno domaće", vol: "0,5 l", price: "390" },
-        { name: "Domaće flaširano pivo", vol: "0,33 l", price: "360" },
+        { name: "Točeno domaće pivo", vol: "0,33 l", price: "320" },
+        { name: "Točeno domaće pivo", vol: "0,50 l", price: "390" },
+        { name: "Domaće flaširano pivo", vol: "0,33 l", price: "390" },
         { name: "Premium uvozno flaširano pivo", vol: "0,33 l", price: "450" },
       ] },
-      { title: "Viski", items: [
+      { title: "Whiskey / Whisky", items: [
         { name: "Jameson", vol: "", price: "390" },
-        { name: "Johnnie Walker Black Label", vol: "", price: "450" },
-        { name: "Jack Daniel's Single Barrel", vol: "", price: "750" },
+        { name: "Johnnie Walker Black Label", vol: "", price: "590" },
+        { name: "Jack Daniel's Single Barrel", vol: "", price: "690" },
         { name: "Macallan", vol: "", price: "790" },
-      ] },
-      { title: "Džin", items: [
-        { name: "Bombay Sapphire", vol: "", price: "390" },
-        { name: "Gin Mare", vol: "", price: "490" },
-      ] },
-      { title: "Votka", items: [
-        { name: "Finlandia", vol: "", price: "390" },
-        { name: "Grey Goose", vol: "", price: "590" },
       ] },
       { title: "Martini", items: [
         { name: "Martini Bianco", vol: "", price: "390" },
         { name: "Martini Rosso", vol: "", price: "390" },
       ] },
+      { title: "Gin", items: [
+        { name: "Bombay Sapphire", vol: "", price: "490" },
+        { name: "Gin Mare", vol: "", price: "690" },
+      ] },
+      { title: "Vodka", items: [
+        { name: "Finlandia", vol: "", price: "390" },
+        { name: "Grey Goose", vol: "", price: "590" },
+      ] },
       { title: "Rum", items: [
-        { name: "Bacardi Carta Blanca", vol: "", price: "390" },
+        { name: "Bacardi Carta Blanca", vol: "", price: "490" },
         { name: "Diplomático Reserva Exclusiva", vol: "", price: "690" },
       ] },
-      { title: "Tekila / Agava", items: [
+      { title: "Tequila / Agave", items: [
         { name: "Jimador Reposado", vol: "", price: "490" },
       ] },
-      { title: "Konjak / Brendi", items: [
+      { title: "Cognac / Brandy", items: [
         { name: "Rémy Martin VSOP", vol: "", price: "790" },
       ] },
-      { title: "Digestivi", items: [
+      { title: "Digestifs", items: [
         { name: "Fernet-Branca", vol: "", price: "490" },
         { name: "Amaro Montenegro", vol: "", price: "490" },
       ] },
       { title: "Rakija", items: [
-        { name: "Šljivovica", vol: "", price: "390" },
-        { name: "Kruška", vol: "", price: "450" },
-        { name: "Kajsija", vol: "", price: "450" },
-        { name: "Premium / barrique šljivovica", vol: "", price: "690" },
+        { name: "Kućna šljivovica", vol: "", price: "360" },
+        { name: "Kućna dunja", vol: "", price: "420" },
+        { name: "Kućna kruška / kajsija", vol: "", price: "420" },
+        { name: "Premium / barrique šljivovica", vol: "", price: "490" },
       ] },
-      { title: "Voda / Rosa", items: [
+      { title: "Voda Rosa", items: [
         { name: "Negazirana voda", vol: "0,25 l", price: "290" },
         { name: "Negazirana voda", vol: "0,75 l", price: "490" },
         { name: "Gazirana voda", vol: "0,25 l", price: "290" },
@@ -329,20 +329,21 @@ const sr = {
         { name: "Schweppes Tonic Water", vol: "0,25 l", price: "350" },
         { name: "Fanta", vol: "0,25 l", price: "350" },
         { name: "Sprite", vol: "0,25 l", price: "350" },
-        { name: "Fuse Tea", vol: "0,25 l", price: "350" },
+        { name: "Fuze Tea", vol: "0,25 l", price: "380" },
       ] },
-      { title: "Sokovi / Sveže", items: [
-        { name: "Sok od pomorandže", vol: "0,25 l", price: "350" },
-        { name: "Sok od jabuke", vol: "0,25 l", price: "350" },
-        { name: "Sok od kajsije", vol: "0,25 l", price: "350" },
-        { name: "Sok od borovnice", vol: "0,25 l", price: "350" },
+      { title: "Sokovi Next / Fresh", items: [
+        { name: "Sok od pomorandže", vol: "0,20 l", price: "350" },
+        { name: "Sok od jabuke", vol: "0,20 l", price: "350" },
+        { name: "Sok od šumskog voća", vol: "0,20 l", price: "350" },
+        { name: "Sok od jagoda", vol: "0,20 l", price: "350" },
+        { name: "Sok od breskve", vol: "0,20 l", price: "350" },
         { name: "Sveža limunada", vol: "", price: "420" },
-        { name: "Domaća limunada dana", vol: "", price: "450" },
+        { name: "Domaći ledeni čaj / sezonska limunada", vol: "", price: "450" },
       ] },
       { title: "Kafa", items: [
         { name: "Espresso", vol: "", price: "270" },
-        { name: "Double Espresso", vol: "", price: "290" },
-        { name: "Macchiato", vol: "", price: "290" },
+        { name: "Double Espresso", vol: "", price: "350" },
+        { name: "Cappuccino", vol: "", price: "320" },
         { name: "Latte", vol: "", price: "350" },
         { name: "Iced Coffee / Iced Latte", vol: "", price: "450" },
       ] },
@@ -359,8 +360,8 @@ const sr = {
       sub: "Pametan izbor za sastanke, timove i goste iz firme.",
       intro: "Moderan, organizaciono jednostavan format koji omogućava kvalitetan ručak, brz i siguran servis i prijatnu atmosferu za svaki poslovni susret.",
       setLabel: "Business lunch set",
-      price: "2.350",
-      priceCur: "RSD",
+      price: "20",
+      priceCur: "EUR + PDV",
       perPerson: "po osobi",
       priceNote: "Piće se naručuje iz bara po potrošnji.",
     },
@@ -410,19 +411,19 @@ const sr = {
     packages: [
       {
         name: "Receptor Classic",
-        price: "5.200 RSD / po osobi",
+        price: "45 EUR + PDV po osobi",
         desc: "Jednostavan i opušten format proslave sa fokusom na dobru atmosferu, sharing koncept i grill.",
         features: ["Piće dobrodošlice", "Bogata selekcija jela sa grilla", "Paket pića do 4 sata", "Kafa / čaj"],
       },
       {
         name: "Receptor Brasserie",
-        price: "6.400 RSD / po osobi",
+        price: "55 EUR + PDV po osobi",
         desc: "Moderan i opušten format proslave sa naglaskom na sharing koncept, grill i riverside brasserie atmosferu.",
         features: ["Piće dobrodošlice", "Prošireni sharing", "Izbor jela sa grilla i iz peći", "Paket pića do 4 sata", "Kafa / čaj"],
       },
       {
         name: "Receptor Signature",
-        price: "7.600 RSD / po osobi",
+        price: "65 EUR + PDV po osobi",
         desc: "Elegantniji format sa pažljivo odabranim jelima za sharing, bogatijim uvodnim stolom i proširenim paketom pića.",
         features: ["Aperitiv dobrodošlice", "Premium uvodni sto", "Brasserie selection jela", "Prošireni paket pića do 4 sata", "Kafa / čaj"],
       },
@@ -487,7 +488,7 @@ const sr = {
     },
     parking: {
       title: "Parking",
-      note: "Vaša rezervacija uključuje i parking mesto.",
+      note: "Uz rezervaciju stola vaše parking mesto je zagarantovano.",
       items: [
         "Obezbeđeno parking mesto za sve goste",
         "Nalazi se odmah pored ulaza u restoran",
@@ -496,7 +497,7 @@ const sr = {
       label: "Receptor Parking",
     },
     form: {
-      title: "Rezerviši sto",
+      title: "Pošaljite nam poruku",
       name: "Ime i prezime",
       email: "E-mail",
       phone: "Telefon",
@@ -526,7 +527,7 @@ const sr = {
   footer: {
     tagline: "Riverside brasserie u srcu Beograda — večere uz reku, dobra vina i jela za deljenje.",
     reservations: "Rezervacije",
-    copy: "© 2025 Receptor Restaurant. Sva prava zadržana.",
+    copy: "© 2026 Receptor Restaurant. Sva prava zadržana.",
   },
 };
 
@@ -556,7 +557,7 @@ const en: Dict = {
     businessLunch: "Business lunch",
     sendInquiry: "Send inquiry",
     callNow: "Call now",
-    directions: "Get directions",
+    directions: "Open map",
   },
 
   common: { from: "from", perPerson: "per person", currency: "RSD", langLabel: "SR" },
@@ -776,35 +777,35 @@ const en: Dict = {
         { name: "Negroni", vol: "", price: "850" },
         { name: "Gin & Tonic", vol: "", price: "750" },
         { name: "Whiskey Sour", vol: "", price: "850" },
-        { name: "Espresso Martini", vol: "", price: "850" },
-        { name: "French 75", vol: "", price: "850" },
+        { name: "Espresso Martini", vol: "", price: "950" },
+        { name: "French 75", vol: "", price: "950" },
       ] },
       { title: "Beer", items: [
         { name: "House draft", vol: "0.33 l", price: "320" },
-        { name: "House draft", vol: "0.5 l", price: "390" },
-        { name: "House bottled beer", vol: "0.33 l", price: "360" },
+        { name: "House draft", vol: "0.50 l", price: "390" },
+        { name: "House bottled beer", vol: "0.33 l", price: "390" },
         { name: "Premium imported bottled beer", vol: "0.33 l", price: "450" },
       ] },
       { title: "Whiskey / Whisky", items: [
         { name: "Jameson", vol: "", price: "390" },
-        { name: "Johnnie Walker Black Label", vol: "", price: "450" },
-        { name: "Jack Daniel's Single Barrel", vol: "", price: "750" },
+        { name: "Johnnie Walker Black Label", vol: "", price: "590" },
+        { name: "Jack Daniel's Single Barrel", vol: "", price: "690" },
         { name: "Macallan", vol: "", price: "790" },
-      ] },
-      { title: "Gin", items: [
-        { name: "Bombay Sapphire", vol: "", price: "390" },
-        { name: "Gin Mare", vol: "", price: "490" },
-      ] },
-      { title: "Vodka", items: [
-        { name: "Finlandia", vol: "", price: "390" },
-        { name: "Grey Goose", vol: "", price: "590" },
       ] },
       { title: "Martini", items: [
         { name: "Martini Bianco", vol: "", price: "390" },
         { name: "Martini Rosso", vol: "", price: "390" },
       ] },
+      { title: "Gin", items: [
+        { name: "Bombay Sapphire", vol: "", price: "490" },
+        { name: "Gin Mare", vol: "", price: "690" },
+      ] },
+      { title: "Vodka", items: [
+        { name: "Finlandia", vol: "", price: "390" },
+        { name: "Grey Goose", vol: "", price: "590" },
+      ] },
       { title: "Rum", items: [
-        { name: "Bacardi Carta Blanca", vol: "", price: "390" },
+        { name: "Bacardi Carta Blanca", vol: "", price: "490" },
         { name: "Diplomático Reserva Exclusiva", vol: "", price: "690" },
       ] },
       { title: "Tequila / Agave", items: [
@@ -818,12 +819,12 @@ const en: Dict = {
         { name: "Amaro Montenegro", vol: "", price: "490" },
       ] },
       { title: "Rakija", items: [
-        { name: "Plum rakija", vol: "", price: "390" },
-        { name: "Pear", vol: "", price: "450" },
-        { name: "Apricot", vol: "", price: "450" },
-        { name: "Premium / barrique plum rakija", vol: "", price: "690" },
+        { name: "House plum rakija", vol: "", price: "360" },
+        { name: "House quince", vol: "", price: "420" },
+        { name: "House pear / apricot", vol: "", price: "420" },
+        { name: "Premium / barrique plum rakija", vol: "", price: "490" },
       ] },
-      { title: "Water / Rosa", items: [
+      { title: "Water Rosa", items: [
         { name: "Still water", vol: "0.25 l", price: "290" },
         { name: "Still water", vol: "0.75 l", price: "490" },
         { name: "Sparkling water", vol: "0.25 l", price: "290" },
@@ -836,20 +837,21 @@ const en: Dict = {
         { name: "Schweppes Tonic Water", vol: "0.25 l", price: "350" },
         { name: "Fanta", vol: "0.25 l", price: "350" },
         { name: "Sprite", vol: "0.25 l", price: "350" },
-        { name: "Fuse Tea", vol: "0.25 l", price: "350" },
+        { name: "Fuze Tea", vol: "0.25 l", price: "380" },
       ] },
-      { title: "Juices / Fresh", items: [
-        { name: "Orange juice", vol: "0.25 l", price: "350" },
-        { name: "Apple juice", vol: "0.25 l", price: "350" },
-        { name: "Apricot juice", vol: "0.25 l", price: "350" },
-        { name: "Blueberry juice", vol: "0.25 l", price: "350" },
+      { title: "Juices Next / Fresh", items: [
+        { name: "Orange juice", vol: "0.20 l", price: "350" },
+        { name: "Apple juice", vol: "0.20 l", price: "350" },
+        { name: "Forest fruits juice", vol: "0.20 l", price: "350" },
+        { name: "Strawberry juice", vol: "0.20 l", price: "350" },
+        { name: "Peach juice", vol: "0.20 l", price: "350" },
         { name: "Fresh lemonade", vol: "", price: "420" },
-        { name: "House lemonade of the day", vol: "", price: "450" },
+        { name: "House iced tea / seasonal lemonade", vol: "", price: "450" },
       ] },
       { title: "Coffee", items: [
         { name: "Espresso", vol: "", price: "270" },
-        { name: "Double Espresso", vol: "", price: "290" },
-        { name: "Macchiato", vol: "", price: "290" },
+        { name: "Double Espresso", vol: "", price: "350" },
+        { name: "Cappuccino", vol: "", price: "320" },
         { name: "Latte", vol: "", price: "350" },
         { name: "Iced Coffee / Iced Latte", vol: "", price: "450" },
       ] },
@@ -865,8 +867,8 @@ const en: Dict = {
       sub: "A smart choice for meetings, teams and company guests.",
       intro: "A modern, organizationally simple format that delivers a quality lunch, fast and reliable service and a pleasant atmosphere for every business meeting.",
       setLabel: "Business lunch set",
-      price: "2.350",
-      priceCur: "RSD",
+      price: "20",
+      priceCur: "EUR + PDV",
       perPerson: "per person",
       priceNote: "Drinks ordered at the bar as consumed.",
     },
@@ -915,19 +917,19 @@ const en: Dict = {
     packages: [
       {
         name: "Receptor Classic",
-        price: "5.200 RSD / person",
+        price: "45 EUR + VAT per person",
         desc: "A simple, relaxed event format focused on a good atmosphere, the sharing concept and the grill.",
         features: ["Welcome drink", "Rich selection of grilled dishes", "Drinks package up to 4 hours", "Coffee / tea"],
       },
       {
         name: "Receptor Brasserie",
-        price: "6.400 RSD / person",
+        price: "55 EUR + VAT per person",
         desc: "A modern, relaxed event format emphasizing the sharing concept, the grill and the riverside brasserie atmosphere.",
         features: ["Welcome drink", "Extended sharing", "Dishes from the grill and the oven", "Drinks package up to 4 hours", "Coffee / tea"],
       },
       {
         name: "Receptor Signature",
-        price: "7.600 RSD / person",
+        price: "65 EUR + VAT per person",
         desc: "A more elegant format with carefully chosen dishes for sharing, a richer opening table and an extended drinks package.",
         features: ["Welcome aperitif", "Premium opening table", "Brasserie selection dishes", "Extended drinks package up to 4 hours", "Coffee / tea"],
       },
@@ -990,7 +992,7 @@ const en: Dict = {
     },
     parking: {
       title: "Parking",
-      note: "Your reservation includes a parking space.",
+      note: "With a table reservation, your parking space is guaranteed.",
       items: [
         "A parking space secured for every guest",
         "Located right by the restaurant entrance",
@@ -999,7 +1001,7 @@ const en: Dict = {
       label: "Receptor Parking",
     },
     form: {
-      title: "Reserve a table",
+      title: "Send us a message",
       name: "Full name",
       email: "E-mail",
       phone: "Phone",
@@ -1028,7 +1030,7 @@ const en: Dict = {
   footer: {
     tagline: "A riverside brasserie in the heart of Belgrade — dinners by the river, good wine and plates for sharing.",
     reservations: "Reservations",
-    copy: "© 2025 Receptor Restaurant. All rights reserved.",
+    copy: "© 2026 Receptor Restaurant. All rights reserved.",
   },
 };
 
@@ -1056,7 +1058,7 @@ const ru: Dict = {
     businessLunch: "Бизнес-ланч",
     sendInquiry: "Отправить запрос",
     callNow: "Позвонить",
-    directions: "Маршрут",
+    directions: "Открыть карту",
   },
 
   common: { from: "от", perPerson: "на человека", currency: "RSD", langLabel: "SR" },
@@ -1267,44 +1269,44 @@ const ru: Dict = {
     },
     smallprint: "Цены указаны в RSD и включают НДС.",
     groups: [
-      { title: "Аперитивы / Openers", items: [
+      { title: "Aperitif / Openers", items: [
         { name: "Aperol Spritz", vol: "", price: "750" },
         { name: "Hugo Spritz", vol: "", price: "750" },
         { name: "Dry Vermouth & Tonic", vol: "", price: "650" },
       ] },
-      { title: "Коктейли", items: [
+      { title: "Cocktails", items: [
         { name: "Negroni", vol: "", price: "850" },
         { name: "Gin & Tonic", vol: "", price: "750" },
         { name: "Whiskey Sour", vol: "", price: "850" },
-        { name: "Espresso Martini", vol: "", price: "850" },
-        { name: "French 75", vol: "", price: "850" },
+        { name: "Espresso Martini", vol: "", price: "950" },
+        { name: "French 75", vol: "", price: "950" },
       ] },
       { title: "Пиво", items: [
         { name: "Разливное домашнее", vol: "0,33 л", price: "320" },
-        { name: "Разливное домашнее", vol: "0,5 л", price: "390" },
-        { name: "Домашнее бутылочное пиво", vol: "0,33 л", price: "360" },
+        { name: "Разливное домашнее", vol: "0,50 л", price: "390" },
+        { name: "Домашнее бутылочное пиво", vol: "0,33 л", price: "390" },
         { name: "Премиум импортное бутылочное пиво", vol: "0,33 л", price: "450" },
       ] },
       { title: "Whiskey / Whisky", items: [
         { name: "Jameson", vol: "", price: "390" },
-        { name: "Johnnie Walker Black Label", vol: "", price: "450" },
-        { name: "Jack Daniel's Single Barrel", vol: "", price: "750" },
+        { name: "Johnnie Walker Black Label", vol: "", price: "590" },
+        { name: "Jack Daniel's Single Barrel", vol: "", price: "690" },
         { name: "Macallan", vol: "", price: "790" },
-      ] },
-      { title: "Gin", items: [
-        { name: "Bombay Sapphire", vol: "", price: "390" },
-        { name: "Gin Mare", vol: "", price: "490" },
-      ] },
-      { title: "Vodka", items: [
-        { name: "Finlandia", vol: "", price: "390" },
-        { name: "Grey Goose", vol: "", price: "590" },
       ] },
       { title: "Martini", items: [
         { name: "Martini Bianco", vol: "", price: "390" },
         { name: "Martini Rosso", vol: "", price: "390" },
       ] },
+      { title: "Gin", items: [
+        { name: "Bombay Sapphire", vol: "", price: "490" },
+        { name: "Gin Mare", vol: "", price: "690" },
+      ] },
+      { title: "Vodka", items: [
+        { name: "Finlandia", vol: "", price: "390" },
+        { name: "Grey Goose", vol: "", price: "590" },
+      ] },
       { title: "Rum", items: [
-        { name: "Bacardi Carta Blanca", vol: "", price: "390" },
+        { name: "Bacardi Carta Blanca", vol: "", price: "490" },
         { name: "Diplomático Reserva Exclusiva", vol: "", price: "690" },
       ] },
       { title: "Tequila / Agave", items: [
@@ -1313,17 +1315,17 @@ const ru: Dict = {
       { title: "Cognac / Brandy", items: [
         { name: "Rémy Martin VSOP", vol: "", price: "790" },
       ] },
-      { title: "Дижестивы", items: [
+      { title: "Digestifs", items: [
         { name: "Fernet-Branca", vol: "", price: "490" },
         { name: "Amaro Montenegro", vol: "", price: "490" },
       ] },
       { title: "Ракия", items: [
-        { name: "Сливовая ракия", vol: "", price: "390" },
-        { name: "Грушевая", vol: "", price: "450" },
-        { name: "Абрикосовая", vol: "", price: "450" },
-        { name: "Премиум / barrique сливовая", vol: "", price: "690" },
+        { name: "Домашняя сливовая", vol: "", price: "360" },
+        { name: "Домашняя айвовая", vol: "", price: "420" },
+        { name: "Домашняя грушевая / абрикосовая", vol: "", price: "420" },
+        { name: "Премиум / barrique сливовая", vol: "", price: "490" },
       ] },
-      { title: "Вода / Rosa", items: [
+      { title: "Вода Rosa", items: [
         { name: "Негазированная вода", vol: "0,25 л", price: "290" },
         { name: "Негазированная вода", vol: "0,75 л", price: "490" },
         { name: "Газированная вода", vol: "0,25 л", price: "290" },
@@ -1336,20 +1338,21 @@ const ru: Dict = {
         { name: "Schweppes Tonic Water", vol: "0,25 л", price: "350" },
         { name: "Fanta", vol: "0,25 л", price: "350" },
         { name: "Sprite", vol: "0,25 л", price: "350" },
-        { name: "Fuse Tea", vol: "0,25 л", price: "350" },
+        { name: "Fuze Tea", vol: "0,25 л", price: "380" },
       ] },
-      { title: "Соки / Fresh", items: [
-        { name: "Апельсиновый сок", vol: "0,25 л", price: "350" },
-        { name: "Яблочный сок", vol: "0,25 л", price: "350" },
-        { name: "Абрикосовый сок", vol: "0,25 л", price: "350" },
-        { name: "Черничный сок", vol: "0,25 л", price: "350" },
+      { title: "Соки Next / Fresh", items: [
+        { name: "Апельсиновый сок", vol: "0,20 л", price: "350" },
+        { name: "Яблочный сок", vol: "0,20 л", price: "350" },
+        { name: "Сок из лесных ягод", vol: "0,20 л", price: "350" },
+        { name: "Клубничный сок", vol: "0,20 л", price: "350" },
+        { name: "Персиковый сок", vol: "0,20 л", price: "350" },
         { name: "Свежий лимонад", vol: "", price: "420" },
-        { name: "Домашний лимонад дня", vol: "", price: "450" },
+        { name: "Домашний холодный чай / сезонный лимонад", vol: "", price: "450" },
       ] },
       { title: "Кофе", items: [
         { name: "Espresso", vol: "", price: "270" },
-        { name: "Double Espresso", vol: "", price: "290" },
-        { name: "Macchiato", vol: "", price: "290" },
+        { name: "Double Espresso", vol: "", price: "350" },
+        { name: "Cappuccino", vol: "", price: "320" },
         { name: "Latte", vol: "", price: "350" },
         { name: "Iced Coffee / Iced Latte", vol: "", price: "450" },
       ] },
@@ -1365,8 +1368,8 @@ const ru: Dict = {
       sub: "Умный выбор для встреч, команд и гостей компании.",
       intro: "Современный, организационно простой формат, который обеспечивает качественный обед, быстрый и надёжный сервис и приятную атмосферу для любой деловой встречи.",
       setLabel: "Business lunch set",
-      price: "2.350",
-      priceCur: "RSD",
+      price: "20",
+      priceCur: "EUR + PDV",
       perPerson: "на человека",
       priceNote: "Напитки заказываются у бара по мере потребления.",
     },
@@ -1415,19 +1418,19 @@ const ru: Dict = {
     packages: [
       {
         name: "Receptor Classic",
-        price: "5.200 RSD / на человека",
+        price: "45 EUR + НДС с человека",
         desc: "Простой и расслабленный формат с акцентом на хорошую атмосферу, концепцию share и гриль.",
         features: ["Приветственный напиток", "Богатый выбор блюд с гриля", "Пакет напитков до 4 часов", "Кофе / чай"],
       },
       {
         name: "Receptor Brasserie",
-        price: "6.400 RSD / на человека",
+        price: "55 EUR + НДС с человека",
         desc: "Современный и расслабленный формат с акцентом на share, гриль и риверсайд-атмосферу брассери.",
         features: ["Приветственный напиток", "Расширенный share", "Блюда с гриля и из печи", "Пакет напитков до 4 часов", "Кофе / чай"],
       },
       {
         name: "Receptor Signature",
-        price: "7.600 RSD / на человека",
+        price: "65 EUR + НДС с человека",
         desc: "Более элегантный формат с тщательно отобранными блюдами для share, богаче вступительным столом и расширенным пакетом напитков.",
         features: ["Приветственный аперитив", "Премиальный вступительный стол", "Блюда brasserie selection", "Расширенный пакет напитков до 4 часов", "Кофе / чай"],
       },
@@ -1490,7 +1493,7 @@ const ru: Dict = {
     },
     parking: {
       title: "Парковка",
-      note: "Ваша бронь включает парковочное место.",
+      note: "При бронировании стола парковочное место для вас гарантировано.",
       items: [
         "Парковочное место для каждого гостя",
         "Расположена прямо у входа в ресторан",
@@ -1499,7 +1502,7 @@ const ru: Dict = {
       label: "Receptor Parking",
     },
     form: {
-      title: "Забронировать стол",
+      title: "Напишите нам сообщение",
       name: "Имя и фамилия",
       email: "E-mail",
       phone: "Телефон",
@@ -1528,7 +1531,7 @@ const ru: Dict = {
   footer: {
     tagline: "Риверсайд-брассери в сердце Белграда — ужины у реки, хорошее вино и блюда для компании.",
     reservations: "Бронирование",
-    copy: "© 2025 Receptor Restaurant. Все права защищены.",
+    copy: "© 2026 Receptor Restaurant. Все права защищены.",
   },
 };
 

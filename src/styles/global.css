@@ -199,6 +199,29 @@ p { margin: 0 0 1rem; }
   border-color: var(--gold-bright);
 }
 
+.btn-dark {
+  background: var(--green-900);
+  color: var(--text-on-dark);
+  border-color: var(--green-900);
+}
+.btn-dark:hover {
+  background: var(--green-800);
+  border-color: var(--green-800);
+}
+
+.btn-soft {
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--line-cream);
+}
+.btn-soft:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* Inline icon next to button text. */
+.btn-ico { width: 14px; height: 14px; flex: none; }
+
 .btn-outline {
   background: transparent;
   color: var(--text-on-cream);

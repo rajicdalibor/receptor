@@ -94,6 +94,14 @@
   background-size: cover;
   background-position: center;
   min-height: 300px;
+  /* Soft fade on the left edge so the photo "bleeds" into the cream text
+     panel instead of having a hard rectangular cut. */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 100%);
+}
+.phero-split.is-dark .phero-media {
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 100%);
 }
 .phero-split.is-dark { background: var(--green-900); color: var(--text-on-dark); }
 
@@ -411,11 +419,24 @@
 
 /* ---------- Drink menu (1:1, dark) ---------- */
 .pica-title { text-transform: uppercase; letter-spacing: 0.02em; }
-.drink-grid {
+.drink-row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(28px, 3vw, 56px);
+  align-items: start;
+  margin-bottom: clamp(36px, 4vw, 56px);
+}
+.drink-row-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: clamp(28px, 3vw, 48px) clamp(28px, 3vw, 56px);
+  gap: clamp(28px, 3vw, 48px);
   align-items: start;
+  margin-bottom: clamp(36px, 4vw, 56px);
+}
+.drink-stack {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 2vw, 28px);
 }
 .drink-cat {
   font-family: var(--serif);
@@ -427,6 +448,17 @@
   padding-bottom: 10px;
   margin-bottom: 14px;
   border-bottom: 1px solid var(--line-cream);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.drink-cat-vol {
+  font-family: var(--sans);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: none;
+  font-weight: 400;
 }
 .drink-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
 .drink-row { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; }
@@ -434,12 +466,17 @@
 .drink-vol { font-style: normal; font-size: 0.74rem; color: var(--muted); }
 .drink-price { font-size: 0.84rem; color: var(--muted); white-space: nowrap; }
 .surface-dark .drink-cat { border-bottom-color: var(--line-dark); }
+.surface-dark .drink-cat-vol { color: var(--muted-on-dark); }
 .surface-dark .drink-name { color: var(--text-on-dark); }
 .surface-dark .drink-vol,
 .surface-dark .drink-price { color: var(--muted-on-dark); }
 
-@media (max-width: 900px) { .drink-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 520px) { .drink-grid { grid-template-columns: 1fr; } }
+@media (max-width: 900px) {
+  .drink-row-3, .drink-row-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 520px) {
+  .drink-row-3, .drink-row-4 { grid-template-columns: 1fr; }
+}
 
 /* ---------- Wine list (1:1) ---------- */
 .wine-groups {
@@ -465,9 +502,23 @@
 }
 .wine-cat-wide { margin-top: clamp(40px, 4.5vw, 64px); }
 
-.wine { display: grid; grid-template-columns: 50px 1fr; gap: 16px; margin-bottom: 26px; }
-.wine-bottle { display: flex; align-items: flex-start; justify-content: center; padding-top: 2px; }
-.wine-bottle-ico { width: 30px; height: auto; color: var(--bronze); }
+.wine { display: grid; grid-template-columns: 130px 1fr; gap: 22px; margin-bottom: 32px; align-items: start; }
+.wine-bottle {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 130px;
+  height: 280px;
+}
+.wine-bottle-ico { width: 36px; height: auto; color: var(--bronze); }
+.wine-bottle-photo {
+  display: block;
+  height: 100%;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
 .wine-name { font-family: var(--serif); font-size: 1.08rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
 .wine-house {
   display: block;
@@ -492,7 +543,23 @@
 
 .wine-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(28px, 3.5vw, 56px); }
 .wine-cellar { margin-top: 8px; }
-.wine-row-2 { grid-template-columns: repeat(2, 1fr); max-width: 860px; }
+.wine-row-2 { grid-template-columns: repeat(2, 1fr); }
+
+.wine-cellar-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: clamp(28px, 3vw, 56px);
+  align-items: stretch;
+}
+.wine-cellar-photo {
+  background: center/cover no-repeat;
+  border-radius: var(--radius);
+  min-height: 280px;
+}
+@media (max-width: 860px) {
+  .wine-cellar-grid { grid-template-columns: 1fr; }
+  .wine-cellar-photo { min-height: 200px; }
+}
 
 @media (max-width: 860px) {
   .wine-groups { grid-template-columns: 1fr 1fr; }
@@ -580,9 +647,11 @@
 .package-name { font-family: var(--serif); text-transform: uppercase; letter-spacing: 0.04em; font-size: 1.5rem; margin-bottom: 6px; }
 .package-price { color: var(--gold); font-size: 0.84rem; letter-spacing: 0.06em; margin-bottom: 18px; }
 .package-desc { color: var(--muted-on-cream); font-size: 0.92rem; line-height: 1.55; margin-bottom: 20px; }
-.package ul { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 11px; }
-.package li { position: relative; padding-left: 22px; color: var(--text-on-cream); font-size: 0.93rem; }
-.package li::before { content: "✦"; position: absolute; left: 0; color: var(--gold); font-size: 0.66em; top: 0.3em; }
+.package ul,
+.package-features { list-style: none; margin: 0 0 22px; padding: 0; display: grid; gap: 11px; }
+.package li,
+.package-features li { display: flex; align-items: center; gap: 10px; color: var(--text-on-cream); font-size: 0.93rem; padding-left: 0; }
+.package-feat-ico { width: 14px; height: auto; color: var(--gold); flex: none; }
 .package-media { margin: 0 0 18px; border-radius: var(--radius); overflow: hidden; }
 .package-media img { width: 100%; height: 150px; object-fit: cover; }
 .package-cta { margin-top: auto; align-self: flex-start; }

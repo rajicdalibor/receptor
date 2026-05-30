@@ -1,39 +1,77 @@
-import { useMemo } from "react";
+import { useState } from "react";
+import type { ComponentType, SVGProps } from "react";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
 import { img } from "../lib/img";
 import { Ornament } from "../components/ui";
 import { ContactBand } from "../components/ContactBand";
-import { IconBottle, IconLeaf } from "../components/icons";
-import { useData } from "../lib/data";
-import type { Wine } from "../lib/api";
-import type { Lang } from "../i18n/translations";
+import {
+  IconBottle,
+  IconLeaf,
+  IconSparkle,
+  IconWine,
+} from "../components/icons";
+import type { Dict } from "../i18n/translations";
 
-function splitPrice(raw: string): { bottle?: string; glass?: string } {
-  // Backend stores price as either "3100 / 620" (bottle / glass) or "8800.00".
-  if (!raw) return {};
-  const parts = raw.split("/").map((s) => s.trim()).filter(Boolean);
-  if (parts.length === 0) return {};
-  if (parts.length === 1) return { bottle: parts[0] };
-  return { bottle: parts[0], glass: parts[1] };
+// Per-group ornament icon — distinct visual hint per wine type.
+type IconC = ComponentType<{ className?: string } & SVGProps<SVGSVGElement>>;
+const GROUP_ICON: Record<string, IconC> = {
+  // SR
+  "Penušavo": IconSparkle,
+  "Belo": IconWine,
+  "Roze": IconLeaf,
+  "Crveno": IconBottle,
+  "Iz našeg podruma": IconLeaf,
+  // EN
+  "Sparkling": IconSparkle,
+  "White": IconWine,
+  "Rosé": IconLeaf,
+  "Red": IconBottle,
+  "From our cellar": IconLeaf,
+  // RU
+  "Игристое": IconSparkle,
+  "Белое": IconWine,
+  "Розе": IconLeaf,
+  "Красное": IconBottle,
+  "Из нашего погреба": IconLeaf,
+};
+const iconFor = (title: string): IconC => GROUP_ICON[title] || IconLeaf;
+
+type Wine = Dict["vino"]["groups"][number]["wines"][number];
+
+// Maps wine name → image slug (file in /public/images/wines/<slug>.webp).
+// Once user provides real bottle photos, add entries here. Missing entries
+// render the IconBottle SVG as a clean fallback.
+const WINE_IMG: Record<string, string> = {
+  "Simonnet-Febvre Blanc de Blanc": "simonnet-febvre",
+  "Château Marjosse Blanc": "chateau-marjosse-blanc",
+  "Domaine L'Ostal Chardonnay": "lostal-chardonnay",
+  "Michel Lynch Réserve Graves Blanc": "michel-lynch-graves",
+  "LYV Rosé Pays d'Oc": "lyv-rose",
+  "Château Marjosse Rouge": "chateau-marjosse-rouge",
+  "Domaine Martin Rasteau": "domaine-martin-rasteau",
+  "Michel Lynch Bordeaux Rouge": "michel-lynch-bordeaux",
+  "Triptyque Silex": "triptyque-silex",
+  "Syrah, Rhône": "syrah-rhone",
+};
+
+const base = import.meta.env.BASE_URL;
+
+function WineBottlePic({ slug }: { slug?: string }) {
+  const [errored, setErrored] = useState(false);
+  if (!slug || errored) return <IconBottle className="wine-bottle-ico" />;
+  return (
+    <img
+      className="wine-bottle-photo"
+      src={`${base}images/wines/${slug}.webp`}
+      alt=""
+      loading="lazy"
+      onError={() => setErrored(true)}
+    />
+  );
 }
 
-function formatPrice(p: string): string {
-  // "8800.00" → "8.800"; "3100" → "3.100"; "620" → "620"
-  if (!p) return "";
-  const n = Number(p.replace(/[^\d.]/g, ""));
-  if (!Number.isFinite(n) || n <= 0) return p;
-  const rounded = Math.round(n);
-  return rounded.toLocaleString("sr-RS");
-}
-
-function categoryFor(w: Wine, lang: Lang): string {
-  if (lang === "en") return (w.tipvinaeng || "").trim();
-  if (lang === "ru") return (w.tipvinarus || "").trim();
-  return (w.tipvina || "").trim();
-}
-
-function WineRow({
+function WineCard({
   w,
   glassLabel,
   bottleLabel,
@@ -44,24 +82,27 @@ function WineRow({
   bottleLabel: string;
   cur: string;
 }) {
-  const { bottle, glass } = splitPrice(w.price);
+  const slug = WINE_IMG[w.name];
   return (
     <div className="wine">
       <div className="wine-bottle">
-        <IconBottle className="wine-bottle-ico" />
+        <WineBottlePic slug={slug} />
       </div>
       <div className="wine-body">
-        <div className="wine-name">{w.name}</div>
-        {w.description && <p className="wine-desc">{w.description}</p>}
+        <div className="wine-name">
+          {w.name}
+          {w.house && <span className="wine-house">{w.house}</span>}
+        </div>
+        {w.desc && <p className="wine-desc">{w.desc}</p>}
         <div className="wine-prices">
-          {glass && (
+          {w.glass && (
             <span>
-              <em>{glassLabel}</em> {formatPrice(glass)} {cur}
+              <em>{glassLabel}</em> {w.glass} {cur}
             </span>
           )}
-          {bottle && (
+          {w.bottle && (
             <span>
-              <em>{bottleLabel}</em> {formatPrice(bottle)} {cur}
+              <em>{bottleLabel}</em> {w.bottle} {cur}
             </span>
           )}
         </div>
@@ -70,50 +111,17 @@ function WineRow({
   );
 }
 
-type Section = { title: string; wines: Wine[] };
-
-function groupByCategory(wines: Wine[], lang: Lang): Section[] {
-  const order: string[] = [];
-  const map = new Map<string, Wine[]>();
-  for (const w of wines) {
-    const key = categoryFor(w, lang) || "—";
-    if (!map.has(key)) {
-      order.push(key);
-      map.set(key, []);
-    }
-    map.get(key)!.push(w);
-  }
-  return order.map((title) => ({ title, wines: map.get(title)! }));
-}
-
 export default function Vino() {
   const { t, lang } = useI18n();
   const v = t.vino;
   const cur = t.common.currency;
   const cardProps = { glassLabel: v.glassLabel, bottleLabel: v.bottleLabel, cur };
 
-  const { wines, loading, error } = useData();
-
-  const { domace, strana } = useMemo(() => {
-    return {
-      domace: groupByCategory(
-        wines.filter((w) => String(w.type) === "1"),
-        lang,
-      ),
-      strana: groupByCategory(
-        wines.filter((w) => String(w.type) !== "1"),
-        lang,
-      ),
-    };
-  }, [wines, lang]);
-
-  const domaceLabel = lang === "en" ? "Domestic" : lang === "ru" ? "Местные" : "Domaća vina";
-  const stranaLabel = lang === "en" ? "International" : lang === "ru" ? "Импортные" : "Strana vina";
-
-  useReveal([lang, wines]);
+  useReveal([lang]);
 
   return (
     <>
+      {/* HERO */}
       <section
         className="phero phero-split is-dark phero-dark"
         style={{ ["--media" as string]: `url(${img("wine-flight")})` }}
@@ -128,6 +136,7 @@ export default function Vino() {
         />
       </section>
 
+      {/* PHILOSOPHY */}
       <section className="section tight">
         <div className="container narrow" style={{ textAlign: "center" }}>
           <Ornament>{v.philosophyTitle}</Ornament>
@@ -137,69 +146,71 @@ export default function Vino() {
         </div>
       </section>
 
+      {/* GROUPS: Penušavo / Belo / Roze */}
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          {loading.wines && wines.length === 0 && (
-            <p className="menu-note reveal">…</p>
-          )}
-          {error.wines && (
-            <p className="menu-note reveal" style={{ color: "var(--c-rust, #c44)" }}>
-              {error.wines}
+          <div className="wine-groups">
+            {v.groups.map((g) => {
+              const Ico = iconFor(g.title);
+              return (
+                <div className="wine-col reveal" key={g.title}>
+                  <h2 className="wine-cat">
+                    <Ico className="msec-ico" />
+                    {g.title}
+                  </h2>
+                  {g.wines.map((w) => (
+                    <WineCard key={w.name} w={w} {...cardProps} />
+                  ))}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* CRVENO — full-width row */}
+          {(() => {
+            const Ico = iconFor(v.red.title);
+            return (
+              <h2 className="wine-cat wine-cat-wide reveal">
+                <Ico className="msec-ico" />
+                {v.red.title}
+              </h2>
+            );
+          })()}
+          <div className="wine-row reveal">
+            {v.red.wines.map((w) => (
+              <WineCard key={w.name} w={w} {...cardProps} />
+            ))}
+          </div>
+
+          {/* IZ NAŠEG PODRUMA */}
+          <div className="wine-cellar reveal">
+            {(() => {
+              const Ico = iconFor(v.cellar.title);
+              return (
+                <h2 className="wine-cat wine-cat-wide">
+                  <Ico className="msec-ico" />
+                  {v.cellar.title}
+                </h2>
+              );
+            })()}
+            <p className="lead" style={{ maxWidth: 760, marginBottom: 28 }}>
+              {v.cellar.intro}
             </p>
-          )}
+            <div className="wine-cellar-grid">
+              <div className="wine-row wine-row-2">
+                {v.cellar.wines.map((w) => (
+                  <WineCard key={w.name} w={w} {...cardProps} />
+                ))}
+              </div>
+              <div
+                className="wine-cellar-photo"
+                style={{ backgroundImage: `url(${img("cocktail-1")})` }}
+                aria-hidden="true"
+              />
+            </div>
+          </div>
 
-          {wines.length > 0 && (
-            <>
-              {domace.length > 0 && (
-                <>
-                  <h2 className="wine-cat wine-cat-wide reveal">
-                    <IconLeaf className="msec-ico" />
-                    {domaceLabel}
-                  </h2>
-                  <div className="wine-groups">
-                    {domace.map((g) => (
-                      <div className="wine-col reveal" key={"d-" + g.title}>
-                        <h3 className="wine-cat">
-                          <IconLeaf className="msec-ico" />
-                          {g.title}
-                        </h3>
-                        {g.wines.map((w) => (
-                          <WineRow key={"d-" + w.id} w={w} {...cardProps} />
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-
-              {strana.length > 0 && (
-                <>
-                  <h2
-                    className="wine-cat wine-cat-wide reveal"
-                    style={{ marginTop: "clamp(36px,4vw,56px)" }}
-                  >
-                    <IconLeaf className="msec-ico" />
-                    {stranaLabel}
-                  </h2>
-                  <div className="wine-groups">
-                    {strana.map((g) => (
-                      <div className="wine-col reveal" key={"s-" + g.title}>
-                        <h3 className="wine-cat">
-                          <IconLeaf className="msec-ico" />
-                          {g.title}
-                        </h3>
-                        {g.wines.map((w) => (
-                          <WineRow key={"s-" + w.id} w={w} {...cardProps} />
-                        ))}
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-
-              <p className="menu-smallprint">{v.smallprint}</p>
-            </>
-          )}
+          <p className="menu-smallprint">{v.smallprint}</p>
         </div>
       </section>
 
