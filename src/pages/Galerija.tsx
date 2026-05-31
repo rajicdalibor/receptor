@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
-import { img, GALLERY } from "../lib/img";
+import { img, video, GALLERY, isVideo, videoName } from "../lib/img";
 import { Ornament } from "../components/ui";
 import { ContactBand } from "../components/ContactBand";
 import { IconPin } from "../components/icons";
-
-const tall = new Set([1, 6, 9]);
 
 export default function Galerija() {
   const { t, lang } = useI18n();
@@ -24,11 +22,30 @@ export default function Galerija() {
       <section className="section">
         <div className="container">
           <div className="gallery-grid">
-            {GALLERY.map((name, i) => (
-              <span className={"ph reveal" + (tall.has(i) ? " gal-tall" : "")} key={name}>
-                <img src={img(name)} alt="" loading="lazy" />
-              </span>
-            ))}
+            {GALLERY.map((name) => {
+              // Videos are portrait; let them span 2 rows so the natural
+              // 9:16 aspect ratio fits the cell without heavy cropping.
+              const tall = isVideo(name);
+              return (
+                <span
+                  className={"ph reveal" + (tall ? " gal-tall" : "")}
+                  key={name}
+                >
+                  {isVideo(name) ? (
+                    <video
+                      src={video(videoName(name))}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      preload="metadata"
+                    />
+                  ) : (
+                    <img src={img(name)} alt="" loading="lazy" />
+                  )}
+                </span>
+              );
+            })}
           </div>
 
           <div className="gal-cta">

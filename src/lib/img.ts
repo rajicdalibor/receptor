@@ -3,18 +3,24 @@ const base = import.meta.env.BASE_URL;
 /** Resolve a bundled image in /public/images to a base-aware URL. */
 export const img = (name: string) => `${base}images/${name}.webp`;
 
+/** Resolve a video file in /public/images/videos to a base-aware URL. */
+export const video = (name: string) => `${base}images/videos/${name}.mp4`;
+
 /**
- * Galerija — all 61 DSLR photos from the archive.
- * The grid layout cycles through with select "tall" items per the Galerija page logic.
+ * Galerija items — photos and videos mixed.
+ * Videos are prefixed with "video:" and naturally occupy a tall (2-row) slot
+ * because the source clips are portrait-oriented.
  */
 export const GALLERY = [
   "gallery/dsc_0858",
+  "video:video1",
   "gallery/dsc_0859",
   "gallery/dsc_0860",
   "gallery/dsc_0861",
   "gallery/dsc_0862",
   "gallery/dsc_0863",
   "gallery/dsc_0864",
+  "video:video2",
   "gallery/dsc_0865",
   "gallery/dsc_0866",
   "gallery/dsc_0867",
@@ -23,6 +29,7 @@ export const GALLERY = [
   "gallery/dsc_0870",
   "gallery/dsc_0871",
   "gallery/dsc_0872",
+  "video:video3",
   "gallery/dsc_0873",
   "gallery/dsc_0874",
   "gallery/dsc_0875",
@@ -32,6 +39,7 @@ export const GALLERY = [
   "gallery/dsc_0879",
   "gallery/dsc_0880",
   "gallery/dsc_0881",
+  "video:video4",
   "gallery/dsc_0882",
   "gallery/dsc_0883",
   "gallery/dsc_0884",
@@ -40,6 +48,7 @@ export const GALLERY = [
   "gallery/dsc_0887",
   "gallery/dsc_0888",
   "gallery/dsc_0889",
+  "video:video5",
   "gallery/dsc_0890",
   "gallery/dsc_0891",
   "gallery/dsc_0892",
@@ -48,6 +57,7 @@ export const GALLERY = [
   "gallery/dsc_0895",
   "gallery/dsc_0896",
   "gallery/dsc_0897",
+  "video:video6",
   "gallery/dsc_0898",
   "gallery/dsc_0899",
   "gallery/dsc_0900",
@@ -70,3 +80,8 @@ export const GALLERY = [
   "gallery/dsc_0917",
   "gallery/dsc_0918",
 ];
+
+/** True if a GALLERY item refers to a video clip. */
+export const isVideo = (name: string) => name.startsWith("video:");
+/** Strip the "video:" prefix to get the file slug. */
+export const videoName = (name: string) => name.replace(/^video:/, "");
