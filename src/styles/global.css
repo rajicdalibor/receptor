@@ -38,9 +38,9 @@
   --serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
   --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
 
-  /* Layout */
-  --container: 1240px;
-  --container-narrow: 980px;
+  /* Layout — desktop-first per design spec (1320-1440 content panel on 1920 screen). */
+  --container: 1380px;
+  --container-narrow: 1040px;
   --gutter: clamp(20px, 5vw, 48px);
   --radius: 3px;
 

@@ -25,7 +25,7 @@
   display: grid;
   grid-template-columns: 1.12fr 0.88fr;
   background: var(--cream);
-  min-height: clamp(560px, 82vh, 780px);
+  min-height: clamp(640px, 90vh, 1080px);
 }
 .home-hero-text {
   display: flex;

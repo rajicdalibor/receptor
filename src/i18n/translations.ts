@@ -136,7 +136,7 @@ const sr = {
       {
         title: "Ordever Receptora",
         items: [
-          { name: "Ordever Receptora", desc: "Tost rustični hleb, dimljeni jegerski puter sa sirnim namazom i džem od urnebesa", price: "350", unit: "po stolu", tag: "" },
+          { name: "Ordever Receptora", desc: "Tost rustični hleb, dimljeni jegerski puter sa sirnim namazom i džem od urnebesa", price: "250", unit: "po stolu", tag: "" },
         ],
       },
       {
@@ -646,7 +646,7 @@ const en: Dict = {
       {
         title: "Receptor starter",
         items: [
-          { name: "Receptor starter", desc: "Rustic toast, smoked compound butter with cheese spread and urnebes jam", price: "350", unit: "per table", tag: "" },
+          { name: "Receptor starter", desc: "Rustic toast, smoked compound butter with cheese spread and urnebes jam", price: "250", unit: "per table", tag: "" },
         ],
       },
       {
@@ -1147,7 +1147,7 @@ const ru: Dict = {
       {
         title: "Закуска Receptor",
         items: [
-          { name: "Закуска Receptor", desc: "Деревенский хлеб тост, копчёное масло с сырной намазкой и джем урнебес", price: "350", unit: "на стол", tag: "" },
+          { name: "Закуска Receptor", desc: "Деревенский хлеб тост, копчёное масло с сырной намазкой и джем урнебес", price: "250", unit: "на стол", tag: "" },
         ],
       },
       {
