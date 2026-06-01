@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
-import { img, video, GALLERY, isVideo, videoName } from "../lib/img";
+import { img, video, GALLERY, isVideo, isTall, videoName } from "../lib/img";
 import { Ornament } from "../components/ui";
 import { ContactBand } from "../components/ContactBand";
 import { IconPin } from "../components/icons";
@@ -23,9 +23,9 @@ export default function Galerija() {
         <div className="container">
           <div className="gallery-grid">
             {GALLERY.map((name) => {
-              // Videos are portrait; let them span 2 rows so the natural
-              // 9:16 aspect ratio fits the cell without heavy cropping.
-              const tall = isVideo(name);
+              // Videos and portrait photos span 2 rows so they fit their
+              // natural orientation without heavy cropping.
+              const tall = isTall(name);
               return (
                 <span
                   className={"ph reveal" + (tall ? " gal-tall" : "")}

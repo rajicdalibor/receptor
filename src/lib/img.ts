@@ -7,81 +7,54 @@ export const img = (name: string) => `${base}images/${name}.webp`;
 export const video = (name: string) => `${base}images/videos/${name}.mp4`;
 
 /**
- * Galerija items — photos and videos mixed.
- * Videos are prefixed with "video:" and naturally occupy a tall (2-row) slot
- * because the source clips are portrait-oriented.
+ * Galerija items — 6 fresh food/dish photos + 6 atmosphere/character DSC
+ * shots + 6 video clips, mixed naturally.  Videos are prefixed with
+ * "video:" and render as autoplay portrait clips (no controls).
  */
 export const GALLERY = [
-  "gallery/dsc_0858",
+  "gallery/new-1",        // risotto with asparagus
   "video:video1",
-  "gallery/dsc_0859",
-  "gallery/dsc_0860",
-  "gallery/dsc_0861",
-  "gallery/dsc_0862",
-  "gallery/dsc_0863",
-  "gallery/dsc_0864",
+  "gallery/new-2",        // glazed pork w/ potato + beetroot
+  "gallery/dsc_0863",     // river view through window
+  "gallery/new-3",        // creamy meat + cheese close-up
   "video:video2",
-  "gallery/dsc_0865",
-  "gallery/dsc_0866",
-  "gallery/dsc_0867",
-  "gallery/dsc_0868",
-  "gallery/dsc_0869",
-  "gallery/dsc_0870",
-  "gallery/dsc_0871",
-  "gallery/dsc_0872",
+  "gallery/dsc_0867",     // dining hall with lamps
+  "gallery/new-4",        // red wine being poured
+  "gallery/dsc_0884",     // candelabra + pineapple banquet
+  "gallery/dsc_0871",     // table setting, teal wall
+  "gallery/new-5",        // pasta with burrata + tomato
   "video:video3",
-  "gallery/dsc_0873",
-  "gallery/dsc_0874",
-  "gallery/dsc_0875",
-  "gallery/dsc_0876",
-  "gallery/dsc_0877",
-  "gallery/dsc_0878",
-  "gallery/dsc_0879",
-  "gallery/dsc_0880",
-  "gallery/dsc_0881",
+  "gallery/dsc_0875",     // banquet goblets close
+  "gallery/new-6",        // pljeskavica + ajvar
+  "gallery/dsc_0887",     // bar with bottles
+  "gallery/dsc_0860",     // chandelier interior alt
   "video:video4",
-  "gallery/dsc_0882",
-  "gallery/dsc_0883",
-  "gallery/dsc_0884",
-  "gallery/dsc_0885",
-  "gallery/dsc_0886",
-  "gallery/dsc_0887",
-  "gallery/dsc_0888",
-  "gallery/dsc_0889",
+  "gallery/dsc_0890",     // dried peppers + jars (detail)
   "video:video5",
-  "gallery/dsc_0890",
-  "gallery/dsc_0891",
-  "gallery/dsc_0892",
-  "gallery/dsc_0893",
-  "gallery/dsc_0894",
-  "gallery/dsc_0895",
-  "gallery/dsc_0896",
-  "gallery/dsc_0897",
+  "gallery/dsc_0893",     // dining hall at night
   "video:video6",
-  "gallery/dsc_0898",
-  "gallery/dsc_0899",
-  "gallery/dsc_0900",
-  "gallery/dsc_0901",
-  "gallery/dsc_0902",
-  "gallery/dsc_0903",
-  "gallery/dsc_0904",
-  "gallery/dsc_0905",
-  "gallery/dsc_0906",
-  "gallery/dsc_0907",
-  "gallery/dsc_0908",
-  "gallery/dsc_0909",
-  "gallery/dsc_0910",
-  "gallery/dsc_0911",
-  "gallery/dsc_0912",
-  "gallery/dsc_0913",
-  "gallery/dsc_0914",
-  "gallery/dsc_0915",
-  "gallery/dsc_0916",
-  "gallery/dsc_0917",
-  "gallery/dsc_0918",
 ];
 
 /** True if a GALLERY item refers to a video clip. */
 export const isVideo = (name: string) => name.startsWith("video:");
 /** Strip the "video:" prefix to get the file slug. */
 export const videoName = (name: string) => name.replace(/^video:/, "");
+
+/**
+ * Portrait images that should span 2 rows in the gallery grid so they
+ * display in their natural orientation without heavy cropping.
+ */
+const TALL_PHOTOS = new Set([
+  "gallery/new-1",
+  "gallery/new-2",
+  "gallery/new-3",
+  "gallery/new-4",
+  "gallery/new-5",
+  "gallery/new-6",
+  "gallery/dsc_0867",
+  "gallery/dsc_0875",
+]);
+
+/** Whether a GALLERY item should occupy 2 grid rows (video or portrait photo). */
+export const isTall = (name: string) =>
+  isVideo(name) || TALL_PHOTOS.has(name);
