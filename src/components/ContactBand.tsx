@@ -25,6 +25,7 @@ export function ContactBand() {
             <strong>{info.hoursTitle}</strong>
             <span>{info.hours1}</span>
             <span>{info.hours2}</span>
+            <span>{info.hours3}</span>
           </div>
         </div>
         <div className="cb-item">

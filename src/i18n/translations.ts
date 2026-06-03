@@ -49,9 +49,10 @@ const sr = {
       info: {
         addr1: "Karađorđeva 21, Beograd",
         addr2: "Na korak od reke i blizu Kalemegdana",
-        hoursTitle: "Ponedeljak – Subota",
-        hours1: "12:00 – 00:00",
-        hours2: "Kuhinja do 22:30",
+        hoursTitle: "Radno vreme",
+        hours1: "Sreda, četvrtak, petak: 14:00 – 00:00",
+        hours2: "Subota, nedelja: 12:00 – 00:00",
+        hours3: "Ostali dani neradni",
         reserve: "Za rezervacije za isti dan, pozovite direktno.",
       },
     },
@@ -484,7 +485,11 @@ const sr = {
     email: { label: "E-mail", value: "rezervacije@restoranreceptor.rs" },
     hours: {
       label: "Radno vreme",
-      value: ["Ponedeljak – Subota: 12:00 – 00:00", "Kuhinja do 22:30"],
+      value: [
+        "Sreda, četvrtak, petak: 14:00 – 00:00",
+        "Subota, nedelja: 12:00 – 00:00",
+        "Ostali dani neradni",
+      ],
     },
     parking: {
       title: "Parking",
@@ -572,9 +577,10 @@ const en: Dict = {
       info: {
         addr1: "Karađorđeva 21, Belgrade",
         addr2: "Steps from the river, near Kalemegdan",
-        hoursTitle: "Monday – Saturday",
-        hours1: "12:00 – 00:00",
-        hours2: "Kitchen until 22:30",
+        hoursTitle: "Opening hours",
+        hours1: "Wednesday, Thursday, Friday: 14:00 – 00:00",
+        hours2: "Saturday, Sunday: 12:00 – 00:00",
+        hours3: "Closed on other days",
         reserve: "For same-day reservations, call us directly.",
       },
     },
@@ -988,7 +994,11 @@ const en: Dict = {
     email: { label: "E-mail", value: "rezervacije@restoranreceptor.rs" },
     hours: {
       label: "Opening hours",
-      value: ["Monday – Saturday: 12:00 – 00:00", "Kitchen until 22:30"],
+      value: [
+        "Wednesday, Thursday, Friday: 14:00 – 00:00",
+        "Saturday, Sunday: 12:00 – 00:00",
+        "Closed on other days",
+      ],
     },
     parking: {
       title: "Parking",
@@ -1073,9 +1083,10 @@ const ru: Dict = {
       info: {
         addr1: "Карагеоргиева 21, Белград",
         addr2: "В двух шагах от реки и Калемегдана",
-        hoursTitle: "Понедельник – суббота",
-        hours1: "12:00 – 00:00",
-        hours2: "Кухня до 22:30",
+        hoursTitle: "Часы работы",
+        hours1: "Среда, четверг, пятница: 14:00 – 00:00",
+        hours2: "Суббота, воскресенье: 12:00 – 00:00",
+        hours3: "В остальные дни не работаем",
         reserve: "Для брони на сегодня позвоните напрямую.",
       },
     },
@@ -1489,7 +1500,11 @@ const ru: Dict = {
     email: { label: "E-mail", value: "rezervacije@restoranreceptor.rs" },
     hours: {
       label: "Часы работы",
-      value: ["Понедельник – суббота: 12:00 – 00:00", "Кухня до 22:30"],
+      value: [
+        "Среда, четверг, пятница: 14:00 – 00:00",
+        "Суббота, воскресенье: 12:00 – 00:00",
+        "В остальные дни не работаем",
+      ],
     },
     parking: {
       title: "Парковка",

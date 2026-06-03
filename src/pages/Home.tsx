@@ -59,6 +59,7 @@ export default function Home() {
                 <strong>{h.hero.info.hoursTitle}</strong>
                 <span>{h.hero.info.hours1}</span>
                 <span>{h.hero.info.hours2}</span>
+                <span>{h.hero.info.hours3}</span>
               </div>
             </div>
             <div className="hhi hhi-note">
@@ -206,10 +207,10 @@ export default function Home() {
             <p>
               <strong>{k.address.value}</strong>
             </p>
-            <p>
-              {h.hero.info.hoursTitle} · {h.hero.info.hours1}
-            </p>
+            <p><strong>{h.hero.info.hoursTitle}</strong></p>
+            <p>{h.hero.info.hours1}</p>
             <p>{h.hero.info.hours2}</p>
+            <p>{h.hero.info.hours3}</p>
           </div>
           <p className="home-loc-parking">{h.location.parking}</p>
           <div className="home-hero-actions">
