@@ -28,8 +28,10 @@ const proxy = Object.fromEntries(
   ]),
 )
 
+// Deploy target: same-domain cPanel — React served from /, Laravel API on
+// same origin. Local dev still proxies API calls to production backend.
 export default defineConfig({
-  base: '/receptor/',
+  base: '/',
   plugins: [react()],
   server: { proxy },
 })

@@ -8,6 +8,7 @@ import { I18nProvider } from "./i18n/context";
 import { DataProvider } from "./lib/data";
 import { Layout } from "./components/Layout";
 import { ScrollToTop } from "./components/ScrollToTop";
+import { AnalyticsTracker } from "./components/AnalyticsTracker";
 import Home from "./pages/Home";
 import Meni from "./pages/Meni";
 import Vino from "./pages/Vino";
@@ -23,6 +24,7 @@ createRoot(document.getElementById("root")!).render(
       <DataProvider>
       <HashRouter>
         <ScrollToTop />
+        <AnalyticsTracker />
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />

@@ -6,7 +6,7 @@ import { Ornament } from "../components/ui";
 import { ContactBand } from "../components/ContactBand";
 import { IconLeaf } from "../components/icons";
 
-const pkgImages = ["food-sharing", "food-main", "food-plate"];
+const pkgImages = ["proslave-1", "proslave-2", "proslave-3"];
 
 export default function Proslave() {
   const { t, lang } = useI18n();

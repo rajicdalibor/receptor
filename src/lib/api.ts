@@ -1,8 +1,8 @@
 import type { Lang } from "../i18n/translations";
 
-// In production (GitHub Pages), the React app must call the Laravel backend
-// directly on its own origin. In dev, Vite proxy handles relative paths.
-const API_BASE = import.meta.env.PROD ? "https://www.restoranreceptor.rs" : "";
+// Same-origin deploy: React and Laravel served from the same domain via
+// .htaccess. Relative paths work in both dev (Vite proxy) and prod (cPanel).
+const API_BASE = "";
 
 const LANG_CODE: Record<Lang, 1 | 2 | 3> = { sr: 1, en: 2, ru: 3 };
 

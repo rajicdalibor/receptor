@@ -5,6 +5,7 @@ import { useReveal } from "../hooks/useReveal";
 import { img } from "../lib/img";
 import { IconPin, IconPhone, IconMail, IconClock } from "../components/icons";
 import { postReservation } from "../lib/api";
+import { trackLead, trackPhoneClick, trackEmailClick } from "../lib/analytics";
 
 const scrollToForm = () => {
   document
@@ -54,6 +55,10 @@ export default function Kontakt() {
       };
       const result = await postReservation(payload);
       if (result.success) {
+        trackLead({
+          form_id: "reservation",
+          persons: payload.persons,
+        });
         setSent(true);
         form.reset();
       } else {
@@ -100,11 +105,11 @@ export default function Kontakt() {
                   <div>
                     <span className="info-label">{k.phone.label}</span>
                     <div className="info-val">
-                      <a href={tel(k.phone.value)}>{k.phone.value}</a>
+                      <a href={tel(k.phone.value)} onClick={() => trackPhoneClick(k.phone.value)}>{k.phone.value}</a>
                     </div>
                     {k.phone2 && (
                       <div className="info-val">
-                        <a href={tel(k.phone2)}>{k.phone2}</a>
+                        <a href={tel(k.phone2)} onClick={() => trackPhoneClick(k.phone2!)}>{k.phone2}</a>
                       </div>
                     )}
                   </div>
@@ -114,7 +119,7 @@ export default function Kontakt() {
                   <div>
                     <span className="info-label">{k.email.label}</span>
                     <div className="info-val">
-                      <a href={`mailto:${k.email.value}`}>{k.email.value}</a>
+                      <a href={`mailto:${k.email.value}`} onClick={() => trackEmailClick(k.email.value)}>{k.email.value}</a>
                     </div>
                   </div>
                 </div>

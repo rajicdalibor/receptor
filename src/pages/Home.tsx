@@ -12,6 +12,7 @@ import {
   IconPhone,
   IconMail,
 } from "../components/icons";
+import { trackPhoneClick } from "../lib/analytics";
 
 const valueIcons = [IconBriefcase, IconRiver, IconWine, IconUsers];
 
@@ -40,7 +41,7 @@ export default function Home() {
             <Link to="/meni" className="btn btn-soft">
               {h.hero.ctaSecondary}
             </Link>
-            <a href={tel} className="btn-link">
+            <a href={tel} onClick={() => trackPhoneClick(k.phone.value)} className="btn-link">
               <IconPhone className="btn-link-ico" />
               {h.hero.ctaCall}
             </a>
@@ -214,7 +215,7 @@ export default function Home() {
           </div>
           <p className="home-loc-parking">{h.location.parking}</p>
           <div className="home-hero-actions">
-            <a href={tel} className="btn btn-dark">
+            <a href={tel} onClick={() => trackPhoneClick(k.phone.value)} className="btn btn-dark">
               <IconPhone className="btn-ico" />
               {t.cta.callNow}
             </a>
@@ -251,7 +252,7 @@ export default function Home() {
             <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
               {h.finalCta.ctaReserve}
             </Link>
-            <a href={tel} className="btn btn-dark">
+            <a href={tel} onClick={() => trackPhoneClick(k.phone.value)} className="btn btn-dark">
               <IconPhone className="btn-ico" />
               {h.finalCta.ctaCall}
             </a>

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useI18n } from "../i18n/context";
 import { IconPin, IconClock, IconPhone } from "./icons";
+import { trackPhoneClick } from "../lib/analytics";
 import "./contactband.css";
 
 export function ContactBand() {
@@ -31,8 +32,8 @@ export function ContactBand() {
         <div className="cb-item">
           <IconPhone className="cb-ico" />
           <div>
-            <a href={tel(k.phone.value)}>{k.phone.value}</a>
-            {k.phone2 && <a href={tel(k.phone2)}>{k.phone2}</a>}
+            <a href={tel(k.phone.value)} onClick={() => trackPhoneClick(k.phone.value)}>{k.phone.value}</a>
+            {k.phone2 && <a href={tel(k.phone2)} onClick={() => trackPhoneClick(k.phone2!)}>{k.phone2}</a>}
           </div>
         </div>
         <Link to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">

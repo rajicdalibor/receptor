@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useI18n } from "../i18n/context";
 import { IconPhone, IconMail, IconGoogle } from "./icons";
 import { SOCIAL } from "../lib/site";
+import { trackPhoneClick, trackEmailClick, trackOutboundClick } from "../lib/analytics";
 import "./footer.css";
 
 function IconInstagram() {
@@ -34,9 +35,9 @@ export function Footer() {
           <span className="footer-logo-sub">{t.brand.tagline}</span>
           <p className="footer-tagline">{t.footer.tagline}</p>
           <div className="footer-social">
-            <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram"><IconInstagram /></a>
-            <a href={SOCIAL.facebook} target="_blank" rel="noreferrer" aria-label="Facebook"><IconFacebook /></a>
-            <a href={SOCIAL.google} target="_blank" rel="noreferrer" aria-label="Google"><IconGoogle /></a>
+            <a href={SOCIAL.instagram} target="_blank" rel="noreferrer" aria-label="Instagram" onClick={() => trackOutboundClick(SOCIAL.instagram, "instagram")}><IconInstagram /></a>
+            <a href={SOCIAL.facebook} target="_blank" rel="noreferrer" aria-label="Facebook" onClick={() => trackOutboundClick(SOCIAL.facebook, "facebook")}><IconFacebook /></a>
+            <a href={SOCIAL.google} target="_blank" rel="noreferrer" aria-label="Google" onClick={() => trackOutboundClick(SOCIAL.google, "google")}><IconGoogle /></a>
           </div>
         </div>
 
@@ -55,13 +56,13 @@ export function Footer() {
         <div className="footer-col footer-links">
           <h4 className="footer-h">{t.nav.kontakt}</h4>
           <Link to="/kontakt" state={{ scrollToForm: true }}>{t.footer.reservations}</Link>
-          <a href={tel(k.phone.value)}>{t.cta.callNow}</a>
+          <a href={tel(k.phone.value)} onClick={() => trackPhoneClick(k.phone.value)}>{t.cta.callNow}</a>
         </div>
 
         <div className="footer-col footer-contact">
-          <p><IconPhone /> <a href={tel(k.phone.value)}>{k.phone.value}</a></p>
-          {k.phone2 && <p><IconPhone /> <a href={tel(k.phone2)}>{k.phone2}</a></p>}
-          <p><IconMail /> <a href={`mailto:${k.email.value}`}>{k.email.value}</a></p>
+          <p><IconPhone /> <a href={tel(k.phone.value)} onClick={() => trackPhoneClick(k.phone.value)}>{k.phone.value}</a></p>
+          {k.phone2 && <p><IconPhone /> <a href={tel(k.phone2)} onClick={() => trackPhoneClick(k.phone2!)}>{k.phone2}</a></p>}
+          <p><IconMail /> <a href={`mailto:${k.email.value}`} onClick={() => trackEmailClick(k.email.value)}>{k.email.value}</a></p>
         </div>
       </div>
 
