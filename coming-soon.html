@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Receptor BBQ & Brasserie — uskoro." />
+  <title>Receptor BBQ &amp; Brasserie — Uskoro</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --burgundy: #7d1e27;
+      --cream: #f5eee3;
+      --cream-soft: rgba(245, 238, 227, 0.72);
+      --divider: rgba(245, 238, 227, 0.55);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      background: var(--burgundy);
+      color: var(--cream);
+      font-family: 'Inter', system-ui, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 1100px;
+      width: 100%;
+    }
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(20px, 5vw, 64px);
+      width: 100%;
+    }
+    .ornament {
+      color: var(--cream);
+      opacity: 0.85;
+      width: clamp(32px, 5vw, 58px);
+      height: auto;
+      flex: 0 0 auto;
+    }
+    .brand {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-weight: 700;
+      font-size: clamp(56px, 13vw, 200px);
+      letter-spacing: 0.015em;
+      line-height: 0.95;
+      color: var(--cream);
+      white-space: nowrap;
+    }
+    .subtitle {
+      margin-top: clamp(18px, 2.4vw, 32px);
+      font-weight: 600;
+      font-size: clamp(13px, 1.5vw, 20px);
+      letter-spacing: 0.32em;
+      color: var(--cream);
+    }
+    .divider {
+      width: clamp(120px, 18vw, 220px);
+      height: 1px;
+      background: var(--divider);
+      margin: clamp(18px, 2.4vw, 30px) auto;
+    }
+    .tagline {
+      font-weight: 500;
+      font-size: clamp(11px, 1.3vw, 17px);
+      letter-spacing: 0.4em;
+      color: var(--cream-soft);
+    }
+    .uskoro {
+      margin-top: clamp(48px, 8vw, 110px);
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-weight: 600;
+      font-size: clamp(38px, 6.5vw, 88px);
+      letter-spacing: 0.32em;
+      padding-left: 0.32em;
+      color: var(--cream);
+      line-height: 1;
+    }
+
+    @media (max-width: 480px) {
+      .brand { font-size: clamp(48px, 15vw, 96px); }
+      .brand-row { gap: 14px; }
+      .ornament { width: 26px; }
+      .uskoro { letter-spacing: 0.24em; padding-left: 0.24em; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="brand-row">
+      <svg class="ornament" viewBox="0 0 30 96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M6 8 C 14 2, 22 14, 26 22" />
+        <path d="M6 38 C 14 32, 22 44, 26 52" />
+        <path d="M6 68 C 14 62, 22 74, 26 82" />
+      </svg>
+      <h1 class="brand">RECEPTOR</h1>
+      <svg class="ornament" viewBox="0 0 30 96" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M24 8 C 16 2, 8 14, 4 22" />
+        <path d="M24 38 C 16 32, 8 44, 4 52" />
+        <path d="M24 68 C 16 62, 8 74, 4 82" />
+      </svg>
+    </div>
+    <p class="subtitle">BBQ &amp; BRASSERIE</p>
+    <div class="divider"></div>
+    <p class="tagline">GRILL &nbsp;•&nbsp; SMOKE &nbsp;•&nbsp; BRASSERIE</p>
+    <p class="uskoro">USKORO</p>
+  </main>
+</body>
+</html>
