@@ -1,12 +1,7 @@
-import { Link } from "react-router-dom";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
-import { img } from "../lib/img";
-import { Ornament } from "../components/ui";
-import { ContactBand } from "../components/ContactBand";
-import { IconLeaf } from "../components/icons";
-
-const pkgImages = ["proslave-1", "proslave-2", "proslave-3"];
+import { Link } from "react-router-dom";
+import { PageHero, ReserveBand } from "../components/ui";
 
 export default function Proslave() {
   const { t, lang } = useI18n();
@@ -15,91 +10,82 @@ export default function Proslave() {
 
   return (
     <>
-      {/* HERO */}
-      <section
-        className="phero phero-full phero-dark"
-        style={{ backgroundImage: `url(${img("dining-evening")})` }}
-      >
-        <div className="phero-inner container">
-          <span className="leaf-ornament" aria-hidden="true">❧</span>
-          <h1 className="phero-title pica-title">{p.hero.title}</h1>
-          <span className="phero-script">{p.hero.script}</span>
-          <p className="phero-sub">{p.hero.intro1}</p>
-          <p className="phero-sub" style={{ marginTop: 12 }}>{p.hero.intro2}</p>
+      <PageHero eyebrow={p.hero.eyebrow} tag={p.hero.tag} title={p.hero.title} sub={p.hero.sub} />
+
+      {/* INTRO */}
+      <section className="section tight">
+        <div className="container hsplit">
+          <div className="hsplit-left reveal">
+            <span className="eyebrow">{p.intro.eyebrow}</span>
+            <h2 className="hsplit-title">{p.intro.title}</h2>
+          </div>
+          <div className="hsplit-right reveal">
+            <p>{p.intro.text}</p>
+          </div>
         </div>
       </section>
 
-      {/* PACKAGES */}
-      <section className="section">
+      {/* 3 PACKAGES */}
+      <section className="section tight" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="center">
-            <Ornament>{p.packagesTitle}</Ornament>
-          </div>
-          <div className="packages" style={{ marginTop: "clamp(36px,4vw,56px)" }}>
-            {p.packages.map((pk, i) => (
-              <div className="package reveal" key={pk.name}>
-                <span className="package-name">{pk.name}</span>
-                <span className="package-price">{pk.price}</span>
-                <ul className="package-features">
-                  {pk.features.map((f) => (
-                    <li key={f}>
-                      <IconLeaf className="package-feat-ico" />
-                      <span>{f}</span>
-                    </li>
+          <div className="pkg-grid">
+            {p.packages.map((pk) => (
+              <div className="pkg-card reveal" key={pk.name}>
+                <span className="pkg-label">{pk.label}</span>
+                <h3 className="pkg-name">{pk.name}</h3>
+                <span className="pkg-price">{pk.price}</span>
+                <ul className="pkg-list">
+                  {pk.items.map((it) => (
+                    <li key={it}>{it}</li>
                   ))}
                 </ul>
-                <div className="package-media">
-                  <img src={img(pkgImages[i])} alt="" loading="lazy" />
-                </div>
-                <Link
-                  to="/kontakt"
-                  state={{ scrollToForm: true }}
-                  className="btn-ghost package-cta"
-                >
-                  {p.packageCta}
-                </Link>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CUSTOM + NOTES */}
-      <section className="section tight surface-deep">
+      {/* CUSTOM */}
+      <section className="section tight" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="two-col">
-            <div className="reveal">
-              <h2 className="home-h">{p.custom.title}</h2>
-              <p className="lead" style={{ margin: "14px 0 18px" }}>{p.custom.intro}</p>
-              <ul className="bullet-list">
-                {p.custom.items.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
+          <div className="info-block info-block-cta reveal">
+            <div>
+              <span className="eyebrow">{p.custom.eyebrow}</span>
+              <h3 className="info-block-title">{p.custom.title}</h3>
+              <p className="info-block-text">{p.custom.text}</p>
             </div>
-            <div className="reveal">
-              <h2 className="home-h">{p.notesTitle}</h2>
-              <ul className="bullet-list" style={{ marginTop: 18 }}>
-                {p.notes.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
-            </div>
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn-ghost">
+              {p.custom.cta}
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* CLOSING */}
-      <section className="section tight">
-        <div className="container narrow center">
-          <Ornament />
-          <p className="philosophy reveal" style={{ marginTop: 22, fontSize: "clamp(1.5rem,3vw,2.2rem)" }}>
-            {p.closing}
-          </p>
+      {/* IMPORTANT NOTES */}
+      <section className="section tight" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <span className="eyebrow" style={{ display: "block", marginBottom: 20 }}>
+            {p.important.eyebrow}
+          </span>
+          <div className="note-grid">
+            {p.important.notes.map((n) => (
+              <div className="note-cell reveal" key={n}>
+                {n}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <ContactBand />
+      <ReserveBand
+        eyebrow={p.band.eyebrow}
+        title={p.band.title}
+        text={p.band.text}
+        actions={[
+          { label: p.band.ctaInquiry, to: "/kontakt", scrollToForm: true, variant: "solid" },
+          { label: p.band.ctaContact, to: "/kontakt", variant: "outline" },
+        ]}
+      />
     </>
   );
 }
