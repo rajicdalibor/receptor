@@ -11,6 +11,8 @@
   gap: clamp(28px, 3vw, 56px);
 }
 .menu-col { display: flex; flex-direction: column; gap: clamp(28px, 3vw, 44px); }
+/* Offset for the sticky header when jumping to a category anchor. */
+.menu-group, .wine-group, .drink-group { scroll-margin-top: 92px; }
 .menu-group-title {
   font-family: var(--serif);
   font-weight: 500;

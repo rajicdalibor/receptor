@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { Link } from "react-router-dom";
 
 /**
@@ -51,16 +51,27 @@ export function PageHero({
 }
 
 /** Cream category anchor bar under a page hero. Each item links to the
- *  section whose heading equals `target` (label may be shorter). */
+ *  section whose heading equals `target` (label may be shorter).
+ *
+ *  The app uses HashRouter, so a plain href="#id" would be swallowed by the
+ *  router as a route change. Instead we scroll to the element ourselves and
+ *  prevent the default hash navigation. */
 export function CategoryNav({ items }: { items: { label: string; target: string }[] }) {
+  const go = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   return (
     <nav className="cat-nav" aria-label="Kategorije">
       <div className="container cat-nav-inner">
-        {items.map((it) => (
-          <a key={it.label} href={`#${slug(it.target)}`} className="cat-nav-link">
-            {it.label}
-          </a>
-        ))}
+        {items.map((it) => {
+          const id = slug(it.target);
+          return (
+            <a key={it.label} href={`#${id}`} className="cat-nav-link" onClick={go(id)}>
+              {it.label}
+            </a>
+          );
+        })}
       </div>
     </nav>
   );
