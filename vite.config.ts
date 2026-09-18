@@ -1,6 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
+// Minimal Node process typing (avoids a full @types/node dependency).
+declare const process: { env: Record<string, string | undefined> }
+
 const API_TARGET = 'https://www.restoranreceptor.rs'
 
 // Paths that should be proxied to the Laravel backend during local dev.
@@ -28,10 +31,12 @@ const proxy = Object.fromEntries(
   ]),
 )
 
-// Deploy target: same-domain cPanel — React served from /, Laravel API on
-// same origin. Local dev still proxies API calls to production backend.
+// Base path is configurable per deploy target:
+//   - cPanel (same-domain, default): base '/'
+//   - GitHub Pages (rajicdalibor.github.io/receptor/): VITE_BASE=/receptor/
+// Local dev still proxies API calls to the production backend.
 export default defineConfig({
-  base: '/',
+  base: process.env.VITE_BASE ?? '/',
   plugins: [react()],
   server: { proxy },
 })

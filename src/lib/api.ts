@@ -1,8 +1,10 @@
 import type { Lang } from "../i18n/translations";
 
-// Same-origin deploy: React and Laravel served from the same domain via
-// .htaccess. Relative paths work in both dev (Vite proxy) and prod (cPanel).
-const API_BASE = "";
+// API base:
+//   - default "" → same-origin (cPanel deploy + local dev via Vite proxy)
+//   - VITE_API_BASE set → cross-origin (GitHub Pages posts to production
+//     Laravel; requires CORS whitelist for the Pages origin on the server)
+const API_BASE = import.meta.env.VITE_API_BASE ?? "";
 
 const LANG_CODE: Record<Lang, 1 | 2 | 3> = { sr: 1, en: 2, ru: 3 };
 

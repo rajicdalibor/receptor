@@ -1,38 +1,52 @@
 /* ============================================================
-   Receptor — Riverside Brasserie
+   Receptor — BBQ & Brasserie
    Design tokens + global styles
    ============================================================ */
 
 :root {
-  /* Surfaces — warm ivory / cream */
-  --cream: #f4eee2;
-  --cream-deep: #ebe2d0;
-  --cream-card: #f8f3ea;
+  /* Surfaces — warm cream / paper */
+  --cream: #f5efe3;
+  --cream-deep: #ece3d3;
+  --cream-card: #fbf7ef;
 
-  /* Ink — deep olive black (never pure black) */
-  --ink: #1c1e16;
-  --ink-soft: #2a2d22;
+  /* Ink — warm near-black charcoal */
+  --ink: #1a1512;
+  --ink-soft: #26201c;
 
-  /* Greens — soft dark green / deep olive */
-  --green-900: #1d231a;
-  --green-800: #262e22;
-  --green-700: #36402e;
+  /* Dark surfaces — warm charcoal (hero left panel, dark sections, footer) */
+  --charcoal: #1a1512;
+  --charcoal-soft: #26201c;
+  --charcoal-700: #322a24;
 
-  /* Metals — warm gold + bronze */
-  --gold: #b3894a;
-  --gold-bright: #c9a661;
-  --bronze: #8c6b3c;
+  /* Accent — deep burgundy / wine red (brand) */
+  --burgundy: #7d1e27;
+  --burgundy-deep: #6a1922;
+  --burgundy-bright: #98303a;
+  --burgundy-tint: #d49d9d; /* light burgundy for eyebrows on dark surfaces */
 
   /* Text */
-  --text-on-cream: #2a2d22;
-  --muted-on-cream: #6f6857;
-  --text-on-dark: #f2ecde;
-  --muted-on-dark: rgba(242, 236, 222, 0.66);
+  --text-on-cream: #2a231f;
+  --muted-on-cream: #6b6157;
+  --text-on-dark: #f3ede2;
+  --muted-on-dark: rgba(243, 237, 226, 0.66);
+  --text-on-burgundy: #f8efe2;
+  --muted-on-burgundy: rgba(248, 239, 226, 0.72);
 
   /* Lines */
-  --line-cream: rgba(28, 30, 22, 0.14);
-  --line-dark: rgba(242, 236, 222, 0.16);
-  --line-gold: rgba(179, 137, 74, 0.45);
+  --line-cream: rgba(40, 30, 25, 0.16);
+  --line-dark: rgba(243, 237, 226, 0.16);
+  --line-burgundy: rgba(125, 30, 39, 0.4);
+
+  /* --- Back-compat aliases: old components read these names.
+     Repointing here flips the whole palette to the new brand. --- */
+  --gold: var(--burgundy);
+  --gold-bright: var(--burgundy-bright);
+  --bronze: var(--burgundy-deep);
+  --green-900: var(--charcoal);
+  --green-800: var(--charcoal-soft);
+  --green-700: var(--charcoal-700);
+  --line-gold: var(--line-burgundy);
+  --accent: var(--burgundy);
 
   /* Type */
   --serif: "Cormorant Garamond", "Playfair Display", Georgia, serif;
@@ -322,3 +336,171 @@ main { flex: 1; display: flex; flex-direction: column; }
 main > * { flex: none; }
 /* Dark page wrappers grow to fill the viewport so the background reaches the footer */
 .page-fill { flex: 1 0 auto; }
+
+/* ============================================================
+   BBQ & Brasserie — shared primitives (buttons, hero band,
+   category nav, brand strip, reserve band, section heads,
+   info blocks). Used across multiple pages.
+   ============================================================ */
+
+/* ---------- Buttons ---------- */
+.btn-primary {
+  background: var(--burgundy);
+  color: #f8efe2;
+  border-color: var(--burgundy);
+}
+.btn-primary:hover {
+  background: var(--burgundy-deep);
+  border-color: var(--burgundy-deep);
+}
+.btn-outline-light {
+  background: transparent;
+  color: var(--text-on-dark);
+  border-color: rgba(243, 237, 226, 0.45);
+}
+.btn-outline-light:hover {
+  border-color: #f3ede2;
+  color: #fff;
+}
+
+/* ---------- Section heads ---------- */
+.eyebrow { display: inline-block; }
+.sec-head { margin-bottom: clamp(28px, 4vw, 50px); }
+.sec-head .eyebrow { display: block; }
+.sec-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.05;
+  color: var(--ink);
+  margin-top: 10px;
+}
+
+/* ---------- Brand strip (burgundy) ---------- */
+.brand-strip { background: var(--burgundy); color: var(--text-on-burgundy); }
+.brand-strip-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding-block: 15px;
+}
+.brand-strip-item {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+.brand-strip-item:not(:first-child)::before {
+  content: "•";
+  margin-inline: clamp(14px, 3.5vw, 40px);
+  opacity: 0.55;
+}
+
+/* ---------- Page hero (burgundy band) ---------- */
+.page-hero {
+  background: var(--burgundy);
+  color: var(--text-on-burgundy);
+  padding-block: clamp(52px, 8vw, 104px);
+}
+.page-hero-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.page-hero-eyebrow,
+.page-hero-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted-on-burgundy);
+}
+.page-hero-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(2.8rem, 7vw, 5.4rem);
+  line-height: 1;
+  color: #f8efe2;
+  margin-top: clamp(14px, 2.5vw, 28px);
+}
+.page-hero-sub {
+  color: var(--muted-on-burgundy);
+  margin: 12px 0 0;
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  max-width: 60ch;
+}
+
+/* ---------- Category nav (cream bar) ---------- */
+.cat-nav { background: var(--cream-deep); border-bottom: 1px solid var(--line-cream); }
+.cat-nav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(14px, 2.4vw, 30px);
+  padding-block: 14px;
+}
+.cat-nav-link {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--burgundy);
+  transition: opacity var(--t-fast) var(--ease);
+}
+.cat-nav-link:hover { opacity: 0.55; }
+
+/* ---------- Reserve band (dark) ---------- */
+.reserve-band {
+  background: var(--charcoal);
+  color: var(--text-on-dark);
+  padding-block: clamp(40px, 6vw, 74px);
+}
+.reserve-band-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: clamp(24px, 4vw, 56px);
+  flex-wrap: wrap;
+}
+.reserve-band .eyebrow { color: var(--burgundy-tint); display: block; }
+.reserve-band-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  line-height: 1.08;
+  color: #f6efe4;
+  margin-top: 10px;
+  max-width: 20ch;
+}
+.reserve-band-sub { color: var(--muted-on-dark); margin: 10px 0 0; max-width: 48ch; }
+.reserve-band-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- Info block (cream box) ---------- */
+.info-block {
+  background: var(--cream-deep);
+  border: 1px solid var(--line-cream);
+  border-radius: var(--radius);
+  padding: clamp(26px, 4vw, 46px);
+}
+.info-block-title {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  line-height: 1.1;
+  color: var(--ink);
+  margin-top: 10px;
+}
+.info-block-text { color: var(--muted-on-cream); margin: 10px 0 0; max-width: 74ch; }
+.info-block-cta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 720px) {
+  .page-hero-top { flex-direction: column; gap: 6px; }
+}

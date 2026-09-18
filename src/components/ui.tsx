@@ -1,119 +1,135 @@
-import type { ReactNode } from "react";
-import { IconLeaf } from "./icons";
+import type { MouseEvent, ReactNode } from "react";
+import { Link } from "react-router-dom";
 
-export function Eyebrow({ children }: { children: ReactNode }) {
-  return <span className="eyebrow">{children}</span>;
+/**
+ * Slug for in-page anchor ids. Strips Latin diacritics but keeps other
+ * scripts (e.g. Cyrillic) so anchors work in every language.
+ */
+export function slug(s: string): string {
+  return s
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^\p{L}\p{N}]+/gu, "-")
+    .replace(/(^-|-$)/g, "");
 }
 
-export function Ornament({ children }: { children?: ReactNode }) {
+export function Eyebrow({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return <span className={"eyebrow" + (className ? " " + className : "")}>{children}</span>;
+}
+
+/** Burgundy full-width hero band used on all inner pages. */
+export function PageHero({
+  eyebrow,
+  tag,
+  title,
+  sub,
+}: {
+  eyebrow: string;
+  tag?: string;
+  title: string;
+  sub?: string;
+}) {
   return (
-    <div className="ornament" aria-hidden="true">
-      {children ? <span>{children}</span> : <span>✦</span>}
-    </div>
+    <section className="page-hero">
+      <div className="container page-hero-inner">
+        <div className="page-hero-top">
+          <span className="page-hero-eyebrow">{eyebrow}</span>
+          {tag && <span className="page-hero-tag">{tag}</span>}
+        </div>
+        <h1 className="page-hero-title">{title}</h1>
+        {sub && <p className="page-hero-sub">{sub}</p>}
+      </div>
+    </section>
   );
 }
 
-export function SectionTitle({
+/** Cream category anchor bar under a page hero. Each item links to the
+ *  section whose heading equals `target` (label may be shorter).
+ *
+ *  The app uses HashRouter, so a plain href="#id" would be swallowed by the
+ *  router as a route change. Instead we scroll to the element ourselves and
+ *  prevent the default hash navigation. */
+export function CategoryNav({ items }: { items: { label: string; target: string }[] }) {
+  const go = (id: string) => (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+  return (
+    <nav className="cat-nav" aria-label="Kategorije">
+      <div className="container cat-nav-inner">
+        {items.map((it) => {
+          const id = slug(it.target);
+          return (
+            <a key={it.label} href={`#${id}`} className="cat-nav-link" onClick={go(id)}>
+              {it.label}
+            </a>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
+
+export interface BandAction {
+  label: string;
+  to?: string;
+  href?: string;
+  scrollToForm?: boolean;
+  variant?: "solid" | "outline";
+  onClick?: () => void;
+}
+
+/** Dark reservation / inquiry band that sits above the footer. */
+export function ReserveBand({
   eyebrow,
   title,
-  lead,
-  center = false,
+  text,
+  actions,
 }: {
-  eyebrow?: string;
-  title: ReactNode;
-  lead?: string;
-  center?: boolean;
-}) {
-  return (
-    <div className={"section-head" + (center ? " is-center" : "")}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 className="section-title">{title}</h2>
-      {lead && <p className="lead">{lead}</p>}
-    </div>
-  );
-}
-
-export interface MenuItemT {
-  name: string;
-  desc: string;
-  price: string;
-}
-
-export interface MItem {
-  name: string;
-  desc: string;
-  price: string;
-  unit: string;
-  tag: string;
-}
-
-export function MenuSection({
-  title,
-  items,
-  currency,
-}: {
+  eyebrow: string;
   title: string;
-  items: readonly MItem[];
-  currency: string;
+  text?: string;
+  actions: BandAction[];
 }) {
   return (
-    <div className="msec reveal">
-      <h3 className="msec-title">
-        <IconLeaf className="msec-ico" />
-        {title}
-      </h3>
-      <ul className="msec-list">
-        {items.map((it) => (
-          <li className="mrow" key={it.name}>
-            <div className="mrow-head">
-              <span className="mrow-name">
-                {it.name}
-                {it.tag && <em className="mrow-tag"> {it.tag}</em>}
-              </span>
-              {it.price && (
-                <span className="mrow-price">
-                  {it.price} {currency}
-                  {it.unit && <span className="mrow-unit"> / {it.unit}</span>}
-                </span>
-              )}
-            </div>
-            {it.desc && <p className="mrow-desc">{it.desc}</p>}
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export function MenuGroup({
-  title,
-  note,
-  items,
-  currency,
-}: {
-  title: string;
-  note?: string;
-  items: readonly MenuItemT[];
-  currency: string;
-}) {
-  return (
-    <div className="menu-group reveal">
-      <h3 className="menu-group-title">{title}</h3>
-      {note && <p className="menu-group-note">{note}</p>}
-      <ul className="menu-list">
-        {items.map((it) => (
-          <li className="menu-item" key={it.name}>
-            <div className="menu-item-main">
-              <span className="menu-item-name">{it.name}</span>
-              <span className="menu-item-dots" aria-hidden="true" />
-              <span className="menu-item-price">
-                {it.price} <span className="cur">{currency}</span>
-              </span>
-            </div>
-            {it.desc && <span className="menu-item-desc">{it.desc}</span>}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section className="reserve-band">
+      <div className="container reserve-band-inner">
+        <div className="reserve-band-text">
+          <span className="eyebrow reserve-band-eyebrow">{eyebrow}</span>
+          <h2 className="reserve-band-title">{title}</h2>
+          {text && <p className="reserve-band-sub">{text}</p>}
+        </div>
+        <div className="reserve-band-actions">
+          {actions.map((a) => {
+            const cls = "btn " + (a.variant === "outline" ? "btn-outline-light" : "btn-primary");
+            if (a.to) {
+              return (
+                <Link
+                  key={a.label}
+                  to={a.to}
+                  state={a.scrollToForm ? { scrollToForm: true } : undefined}
+                  className={cls}
+                  onClick={a.onClick}
+                >
+                  {a.label}
+                </Link>
+              );
+            }
+            return (
+              <a key={a.label} href={a.href} className={cls} onClick={a.onClick}>
+                {a.label}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
