@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "deploy": "gh-pages -d dist"
+    "build:pages": "VITE_BASE=/receptor/ VITE_API_BASE=https://www.restoranreceptor.rs vite build",
+    "deploy": "gh-pages -d dist",
+    "deploy:pages": "npm run build:pages && gh-pages -d dist"
   },
   "dependencies": {
     "react": "^18.3.1",
