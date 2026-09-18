@@ -1,13 +1,16 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 
-/** Diacritic-insensitive slug for in-page anchor ids. */
+/**
+ * Slug for in-page anchor ids. Strips Latin diacritics but keeps other
+ * scripts (e.g. Cyrillic) so anchors work in every language.
+ */
 export function slug(s: string): string {
   return s
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/[^\p{L}\p{N}]+/gu, "-")
     .replace(/(^-|-$)/g, "");
 }
 
@@ -47,14 +50,15 @@ export function PageHero({
   );
 }
 
-/** Cream category anchor bar under a page hero. */
-export function CategoryNav({ items }: { items: string[] }) {
+/** Cream category anchor bar under a page hero. Each item links to the
+ *  section whose heading equals `target` (label may be shorter). */
+export function CategoryNav({ items }: { items: { label: string; target: string }[] }) {
   return (
     <nav className="cat-nav" aria-label="Kategorije">
       <div className="container cat-nav-inner">
-        {items.map((label) => (
-          <a key={label} href={`#${slug(label)}`} className="cat-nav-link">
-            {label}
+        {items.map((it) => (
+          <a key={it.label} href={`#${slug(it.target)}`} className="cat-nav-link">
+            {it.label}
           </a>
         ))}
       </div>

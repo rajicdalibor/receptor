@@ -9,7 +9,7 @@ export default function Vino() {
   const cur = t.common.currency;
   const f = t.footer.reserveBand;
 
-  const categories = v.columns.flat().map((g) => g.title);
+  const categories = v.columns.flat().map((g) => ({ label: g.title, target: g.title }));
 
   return (
     <>

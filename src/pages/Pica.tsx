@@ -9,12 +9,10 @@ export default function Pica() {
   const cur = t.common.currency;
   const f = t.footer.reserveBand;
 
-  const categories = p.columns.flat().map((g) => g.title);
-
   return (
     <>
       <PageHero eyebrow={p.hero.eyebrow} tag={p.hero.tag} title={p.hero.title} sub={p.hero.sub} />
-      <CategoryNav items={categories} />
+      <CategoryNav items={p.catnav} />
 
       <section className="section tight">
         <div className="container">

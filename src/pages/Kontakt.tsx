@@ -130,16 +130,16 @@ export default function Kontakt() {
 
               <div className="cfield">
                 <label htmlFor="c-name">{k.form.name}</label>
-                <input id="c-name" name="name" type="text" required />
+                <input id="c-name" name="name" type="text" placeholder={k.form.placeholder} required />
               </div>
               <div className="cfield-row">
                 <div className="cfield">
                   <label htmlFor="c-email">{k.form.email}</label>
-                  <input id="c-email" name="email" type="email" required />
+                  <input id="c-email" name="email" type="email" placeholder={k.form.placeholder} required />
                 </div>
                 <div className="cfield">
                   <label htmlFor="c-phone">{k.form.phone}</label>
-                  <input id="c-phone" name="phone" type="tel" />
+                  <input id="c-phone" name="phone" type="tel" placeholder={k.form.placeholder} />
                 </div>
               </div>
               <div className="cfield-row">

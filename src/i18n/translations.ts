@@ -101,6 +101,17 @@ const sr = {
       title: "Jelovnik",
       sub: "Grill, Low & Slow, jela za deljenje, prilozi i deserti.",
     },
+    catnav: [
+      { label: "Za početak", target: "Za početak" },
+      { label: "Topla predjela", target: "Topla predjela" },
+      { label: "Sa roštilja", target: "Sa roštilja" },
+      { label: "Low & Slow", target: "Low & Slow" },
+      { label: "Za deljenje", target: "Plate za deljenje" },
+      { label: "Salate", target: "Salate" },
+      { label: "Prilozi", target: "Prilozi" },
+      { label: "Sosovi", target: "Sosovi" },
+      { label: "Deserti", target: "Deserti" },
+    ],
     columns: [
       [
         {
@@ -112,7 +123,7 @@ const sr = {
         {
           title: "Topla predjela",
           items: [
-            { name: "Pohovana paprika", desc: "Punjena domaćim sirom i špinatom, uz Receptor tartar", price: "590" },
+            { name: "Pohovana paprika", desc: "Punjena domaćim sirom i spanaćem, uz Receptor tartar", price: "590" },
             { name: "Grilovani rtanjski škripavac", desc: "Rtanjski sir sa grila, uz pečenu crvenu papriku", price: "620" },
             { name: "Grilovane šljive u pančeti", desc: "Punjene orasima, uz sos od plavog sira", price: "690" },
           ],
@@ -120,12 +131,12 @@ const sr = {
         {
           title: "Sa roštilja",
           items: [
-            { name: "Ćevapi · 5 komada", desc: "Ćevapi od junećeg mesa, po receptu kuće", price: "630" },
-            { name: "Ćevapi · 10 komada", desc: "Ćevapi od junećeg mesa, po receptu kuće", price: "990" },
+            { name: "Ćevapi · 5 komada", desc: "Ćevapi od junećeg mesa, po recepturi kuće", price: "630" },
+            { name: "Ćevapi · 10 komada", desc: "Ćevapi od junećeg mesa, po recepturi kuće", price: "990" },
             { name: "Domaće kobasice", desc: "Selekcija domaćih kobasica sa grila", price: "1.390" },
             { name: "Pljeskavica", desc: "Juneća pljeskavica sa crnim lukom", price: "1.390" },
-            { name: "Receptor pljeskavica", desc: "Gurmanska pljeskavica po receptu kuće", price: "1.550" },
-            { name: "Steakhouse punjena vešalica", desc: "Punjena vešalica obavijena pančetom i zapečena na grilu", price: "1.790" },
+            { name: "Receptor pljeskavica", desc: "Gurmanska pljeskavica po recepturi kuće", price: "1.550" },
+            { name: "Steakhouse punjena vešalica", desc: "Punjena vešalica obavijena pančetom i završena na grilu", price: "1.790" },
             { name: "Buffalo Wings & Receptor BBQ", desc: "Pileća krilca uz Buffalo sos i Receptor BBQ dip", price: "620 / 1.190" },
           ],
         },
@@ -135,7 +146,7 @@ const sr = {
           title: "Low & Slow",
           items: [
             { name: "Sous-vide piletina", desc: "Pileći file pripremljen sous-vide tehnikom i završen na grilu", price: "1.290" },
-            { name: "Drpana buttica", desc: "Sporo pečena svinjska buttica sa kajmakom i hrskavim lukom", price: "1.490" },
+            { name: "Drpana butkica", desc: "Sporo pečena svinjska butkica sa kajmakom i hrskavim lukom", price: "1.490" },
             { name: "Juneći gulaš sa sušenim vrganjima", desc: "Juneće meso sporo kuvano sa sušenim vrganjima", price: "1.690" },
             { name: "Sporo pečena teletina", desc: "Mlada teletina sa krompirom i cveklom", price: "2.390" },
           ],
@@ -144,7 +155,7 @@ const sr = {
           title: "Plate za deljenje",
           items: [
             { name: "Receptor Grill plata", desc: "Za 2–3 osobe: ćevapi, kobasice i Buffalo Wings, uz priloge i sosove", price: "4.490" },
-            { name: "Receptor Signature", desc: "Za 2 osobe: pohovana paprika, punjena vešalica, teletina i drpana buttica", price: "4.990" },
+            { name: "Receptor Signature", desc: "Za 2 osobe: pohovana paprika, punjena vešalica, teletina i drpana butkica", price: "4.990" },
           ],
         },
         {
@@ -252,6 +263,21 @@ const sr = {
       title: "Karta pića",
       sub: "Aperitivi, kokteli, pivo, jaka pića, bezalkoholna pića, kafa i čaj.",
     },
+    catnav: [
+      { label: "Aperitivi", target: "Aperitivi" },
+      { label: "Kokteli", target: "Kokteli" },
+      { label: "Pivo", target: "Pivo" },
+      { label: "Viski", target: "Viski · 0,03 l" },
+      { label: "Džin", target: "Džin · 0,03 l" },
+      { label: "Vodka", target: "Vodka · 0,03 l" },
+      { label: "Rum", target: "Rum · 0,03 l" },
+      { label: "Tekila", target: "Tekila / Agava · 0,03 l" },
+      { label: "Konjak", target: "Konjak i brendi · 0,03 l" },
+      { label: "Dižestivi", target: "Dižestivi · 0,03 l" },
+      { label: "Rakija", target: "Rakija · 0,03 l" },
+      { label: "Bezalkoholno", target: "Bezalkoholna pića" },
+      { label: "Kafa / Čaj", target: "Kafa" },
+    ],
     columns: [
       [
         {
@@ -472,7 +498,7 @@ const sr = {
           "Piće dobrodošlice",
           "Receptor selekcija predjela",
           "Ćevapi, Receptor pljeskavica i grilovana piletina",
-          "Sporo pečena svinjska buttica",
+          "Sporo pečena svinjska butkica",
           "Prilozi i salate",
           "Desert i paket pića do 4 sata",
         ],
@@ -710,6 +736,17 @@ const en: Dict = {
       title: "Menu",
       sub: "Grill, Low & Slow, plates for sharing, sides and desserts.",
     },
+    catnav: [
+      { label: "Starters", target: "Starters" },
+      { label: "Warm starters", target: "Warm starters" },
+      { label: "From the grill", target: "From the grill" },
+      { label: "Low & Slow", target: "Low & Slow" },
+      { label: "Sharing", target: "Sharing plates" },
+      { label: "Salads", target: "Salads" },
+      { label: "Sides", target: "Sides" },
+      { label: "Sauces", target: "Sauces" },
+      { label: "Desserts", target: "Desserts" },
+    ],
     columns: [
       [
         {
@@ -859,6 +896,21 @@ const en: Dict = {
       title: "Drinks",
       sub: "Aperitifs, cocktails, beer, spirits, soft drinks, coffee and tea.",
     },
+    catnav: [
+      { label: "Aperitifs", target: "Aperitifs" },
+      { label: "Cocktails", target: "Cocktails" },
+      { label: "Beer", target: "Beer" },
+      { label: "Whisky", target: "Whisky · 0.03 l" },
+      { label: "Gin", target: "Gin · 0.03 l" },
+      { label: "Vodka", target: "Vodka · 0.03 l" },
+      { label: "Rum", target: "Rum · 0.03 l" },
+      { label: "Tequila", target: "Tequila / Agave · 0.03 l" },
+      { label: "Cognac", target: "Cognac & brandy · 0.03 l" },
+      { label: "Digestifs", target: "Digestifs · 0.03 l" },
+      { label: "Rakija", target: "Rakija · 0.03 l" },
+      { label: "Soft drinks", target: "Soft drinks" },
+      { label: "Coffee / Tea", target: "Coffee" },
+    ],
     columns: [
       [
         {
@@ -1310,6 +1362,17 @@ const ru: Dict = {
       title: "Меню",
       sub: "Гриль, Low & Slow, блюда для компании, гарниры и десерты.",
     },
+    catnav: [
+      { label: "Закуски", target: "Закуски" },
+      { label: "Тёплые закуски", target: "Тёплые закуски" },
+      { label: "С гриля", target: "С гриля" },
+      { label: "Low & Slow", target: "Low & Slow" },
+      { label: "Для компании", target: "Блюда для компании" },
+      { label: "Салаты", target: "Салаты" },
+      { label: "Гарниры", target: "Гарниры" },
+      { label: "Соусы", target: "Соусы" },
+      { label: "Десерты", target: "Десерты" },
+    ],
     columns: [
       [
         {
@@ -1459,6 +1522,21 @@ const ru: Dict = {
       title: "Карта напитков",
       sub: "Аперитивы, коктейли, пиво, крепкие напитки, безалкогольные напитки, кофе и чай.",
     },
+    catnav: [
+      { label: "Аперитивы", target: "Аперитивы" },
+      { label: "Коктейли", target: "Коктейли" },
+      { label: "Пиво", target: "Пиво" },
+      { label: "Виски", target: "Виски · 0,03 л" },
+      { label: "Джин", target: "Джин · 0,03 л" },
+      { label: "Водка", target: "Водка · 0,03 л" },
+      { label: "Ром", target: "Ром · 0,03 л" },
+      { label: "Текила", target: "Текила / Агава · 0,03 л" },
+      { label: "Коньяк", target: "Коньяк и бренди · 0,03 л" },
+      { label: "Дижестивы", target: "Дижестивы · 0,03 л" },
+      { label: "Ракия", target: "Ракия · 0,03 л" },
+      { label: "Безалкогольное", target: "Безалкогольные напитки" },
+      { label: "Кофе / Чай", target: "Кофе" },
+    ],
     columns: [
       [
         {

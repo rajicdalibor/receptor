@@ -9,12 +9,10 @@ export default function Meni() {
   const cur = t.common.currency;
   const f = t.footer.reserveBand;
 
-  const categories = m.columns.flat().map((g) => g.title);
-
   return (
     <>
       <PageHero eyebrow={m.hero.eyebrow} tag={m.hero.tag} title={m.hero.title} sub={m.hero.sub} />
-      <CategoryNav items={categories} />
+      <CategoryNav items={m.catnav} />
 
       <section className="section tight">
         <div className="container">
