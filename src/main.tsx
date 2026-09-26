@@ -5,7 +5,6 @@ import "./styles/global.css";
 import "./styles/pages.css";
 import "./styles/home.css";
 import { I18nProvider } from "./i18n/context";
-import { DataProvider } from "./lib/data";
 import { Layout } from "./components/Layout";
 import { ScrollToTop } from "./components/ScrollToTop";
 import { AnalyticsTracker } from "./components/AnalyticsTracker";
@@ -21,7 +20,6 @@ import Kontakt from "./pages/Kontakt";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <I18nProvider>
-      <DataProvider>
       <HashRouter>
         <ScrollToTop />
         <AnalyticsTracker />
@@ -39,7 +37,6 @@ createRoot(document.getElementById("root")!).render(
           </Routes>
         </Layout>
       </HashRouter>
-      </DataProvider>
     </I18nProvider>
   </StrictMode>
 );

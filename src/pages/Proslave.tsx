@@ -1,105 +1,127 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
-import { img } from "../lib/img";
-import { Ornament } from "../components/ui";
-import { ContactBand } from "../components/ContactBand";
-import { IconLeaf } from "../components/icons";
-
-const pkgImages = ["proslave-1", "proslave-2", "proslave-3"];
+import { Link, useLocation } from "react-router-dom";
+import { PageHero, ReserveBand, slug } from "../components/ui";
 
 export default function Proslave() {
   const { t, lang } = useI18n();
   useReveal([lang]);
   const p = t.proslave;
+  const location = useLocation();
+
+  // When arriving from a home price box, scroll to the chosen package.
+  useEffect(() => {
+    const s = location.state as { scrollTo?: string } | null;
+    if (!s?.scrollTo) return;
+    const id = s.scrollTo;
+    const timer = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 140);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.key]);
 
   return (
     <>
-      {/* HERO */}
-      <section
-        className="phero phero-full phero-dark"
-        style={{ backgroundImage: `url(${img("dining-evening")})` }}
-      >
-        <div className="phero-inner container">
-          <span className="leaf-ornament" aria-hidden="true">❧</span>
-          <h1 className="phero-title pica-title">{p.hero.title}</h1>
-          <span className="phero-script">{p.hero.script}</span>
-          <p className="phero-sub">{p.hero.intro1}</p>
-          <p className="phero-sub" style={{ marginTop: 12 }}>{p.hero.intro2}</p>
+      <PageHero eyebrow={p.hero.eyebrow} tag={p.hero.tag} title={p.hero.title} sub={p.hero.sub} />
+
+      {/* INTRO */}
+      <section className="section tight">
+        <div className="container hsplit">
+          <div className="hsplit-left reveal">
+            <span className="eyebrow">{p.intro.eyebrow}</span>
+            <h2 className="hsplit-title">{p.intro.title}</h2>
+          </div>
+          <div className="hsplit-right reveal">
+            <p>{p.intro.text}</p>
+          </div>
         </div>
       </section>
 
-      {/* PACKAGES */}
-      <section className="section">
+      {/* EVENT PACKAGES */}
+      <section className="section tight" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="center">
-            <Ornament>{p.packagesTitle}</Ornament>
-          </div>
-          <div className="packages" style={{ marginTop: "clamp(36px,4vw,56px)" }}>
-            {p.packages.map((pk, i) => (
-              <div className="package reveal" key={pk.name}>
-                <span className="package-name">{pk.name}</span>
-                <span className="package-price">{pk.price}</span>
-                <ul className="package-features">
-                  {pk.features.map((f) => (
-                    <li key={f}>
-                      <IconLeaf className="package-feat-ico" />
-                      <span>{f}</span>
-                    </li>
+          <div className="epkgs">
+            {p.packages.map((pk) => (
+              <article className="epkg reveal" key={pk.name} id={slug(pk.name)}>
+                <header className="epkg-head">
+                  <div className="epkg-head-main">
+                    <span className="epkg-format">{pk.format}</span>
+                    <h3 className="epkg-name">{pk.name}</h3>
+                    <p className="epkg-desc">{pk.desc}</p>
+                  </div>
+                  <div className="epkg-price-wrap">
+                    <span className="epkg-price">{pk.price}</span>
+                    <span className="epkg-per">{p.perPerson}</span>
+                    <span className="epkg-meta">{pk.meta}</span>
+                  </div>
+                </header>
+                <div className="epkg-groups">
+                  {pk.groups.map((g) => (
+                    <div className="epkg-group" key={g.title}>
+                      <h4 className="epkg-group-title">{g.title}</h4>
+                      <ul className="epkg-list">
+                        {g.items.map((it) => (
+                          <li key={it}>{it}</li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
-                <div className="package-media">
-                  <img src={img(pkgImages[i])} alt="" loading="lazy" />
                 </div>
-                <Link
-                  to="/kontakt"
-                  state={{ scrollToForm: true }}
-                  className="btn-ghost package-cta"
-                >
-                  {p.packageCta}
-                </Link>
+                {pk.alt.price && (
+                  <p className="epkg-alt">
+                    <strong>{p.altLabel} — {pk.alt.price} {p.perPerson}</strong> {pk.alt.text}
+                  </p>
+                )}
+                <p className="epkg-note">{pk.note}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CUSTOM */}
+      <section className="section tight" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <div className="info-block info-block-cta reveal">
+            <div>
+              <span className="eyebrow">{p.custom.eyebrow}</span>
+              <h3 className="info-block-title">{p.custom.title}</h3>
+              <p className="info-block-text">{p.custom.text}</p>
+            </div>
+            <Link to="/kontakt" state={{ scrollToForm: true }} className="btn-ghost">
+              {p.custom.cta}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* IMPORTANT NOTES */}
+      <section className="section tight" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <span className="eyebrow" style={{ display: "block", marginBottom: 20 }}>
+            {p.important.eyebrow}
+          </span>
+          <div className="note-grid">
+            {p.important.notes.map((n) => (
+              <div className="note-cell reveal" key={n}>
+                {n}
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CUSTOM + NOTES */}
-      <section className="section tight surface-deep">
-        <div className="container">
-          <div className="two-col">
-            <div className="reveal">
-              <h2 className="home-h">{p.custom.title}</h2>
-              <p className="lead" style={{ margin: "14px 0 18px" }}>{p.custom.intro}</p>
-              <ul className="bullet-list">
-                {p.custom.items.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
-            </div>
-            <div className="reveal">
-              <h2 className="home-h">{p.notesTitle}</h2>
-              <ul className="bullet-list" style={{ marginTop: 18 }}>
-                {p.notes.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CLOSING */}
-      <section className="section tight">
-        <div className="container narrow center">
-          <Ornament />
-          <p className="philosophy reveal" style={{ marginTop: 22, fontSize: "clamp(1.5rem,3vw,2.2rem)" }}>
-            {p.closing}
-          </p>
-        </div>
-      </section>
-
-      <ContactBand />
+      <ReserveBand
+        eyebrow={p.band.eyebrow}
+        title={p.band.title}
+        text={p.band.text}
+        actions={[
+          { label: p.band.ctaInquiry, to: "/kontakt", scrollToForm: true, variant: "solid" },
+          { label: p.band.ctaContact, to: "/kontakt", variant: "outline" },
+        ]}
+      />
     </>
   );
 }

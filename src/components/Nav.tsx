@@ -4,16 +4,12 @@ import { useI18n } from "../i18n/context";
 import { Logo } from "./Logo";
 import "./nav.css";
 
-const DARK_HERO_ROUTES = ["/karta-pica", "/proslave", "/galerija", "/kontakt"];
-
 export function Nav() {
   const { t, lang, setLang } = useI18n();
   const langs = ["sr", "en", "ru"] as const;
   const { pathname } = useLocation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-
-  const dark = DARK_HERO_ROUTES.includes(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -33,6 +29,7 @@ export function Nav() {
     };
   }, [open]);
 
+  // Top nav mirrors the presentation 1:1 (gallery lives in the footer).
   const links: { to: string; label: string }[] = [
     { to: "/", label: t.nav.pocetna },
     { to: "/meni", label: t.nav.meni },
@@ -40,18 +37,29 @@ export function Nav() {
     { to: "/karta-pica", label: t.nav.pica },
     { to: "/business-lunch", label: t.nav.business },
     { to: "/proslave", label: t.nav.proslave },
-    { to: "/galerija", label: t.nav.galerija },
     { to: "/kontakt", label: t.nav.kontakt },
   ];
 
+  const langToggle = (
+    <div className="lang-toggle" role="group" aria-label="Jezik">
+      {langs.map((l, i) => (
+        <span key={l} className="lang-grp">
+          {i > 0 && <span className="sep">|</span>}
+          <button
+            type="button"
+            className={"lang-opt" + (lang === l ? " on" : "")}
+            onClick={() => setLang(l)}
+          >
+            {l.toUpperCase()}
+          </button>
+        </span>
+      ))}
+    </div>
+  );
+
   return (
     <header
-      className={[
-        "nav",
-        dark ? "nav-dark" : "nav-light",
-        scrolled ? "nav-scrolled" : "",
-        open ? "nav-open" : "",
-      ].join(" ")}
+      className={["nav", scrolled ? "nav-scrolled" : "", open ? "nav-open" : ""].join(" ")}
     >
       <div className="nav-inner container">
         <NavLink to="/" className="nav-logo" aria-label="Receptor">
@@ -72,21 +80,8 @@ export function Nav() {
         </nav>
 
         <div className="nav-actions">
-          <div className="lang-toggle" role="group" aria-label="Jezik">
-            {langs.map((l, i) => (
-              <span key={l} className="lang-grp">
-                {i > 0 && <span className="sep">/</span>}
-                <button
-                  type="button"
-                  className={"lang-opt" + (lang === l ? " on" : "")}
-                  onClick={() => setLang(l)}
-                >
-                  {l.toUpperCase()}
-                </button>
-              </span>
-            ))}
-          </div>
-          <NavLink to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold nav-reserve">
+          {langToggle}
+          <NavLink to="/kontakt" state={{ scrollToForm: true }} className="btn btn-primary nav-reserve">
             {t.cta.reserve}
           </NavLink>
           <button
@@ -117,21 +112,8 @@ export function Nav() {
           ))}
         </nav>
         <div className="nav-mobile-actions">
-          <div className="lang-toggle" role="group" aria-label="Jezik">
-            {langs.map((l, i) => (
-              <span key={l} className="lang-grp">
-                {i > 0 && <span className="sep">/</span>}
-                <button
-                  type="button"
-                  className={"lang-opt" + (lang === l ? " on" : "")}
-                  onClick={() => setLang(l)}
-                >
-                  {l.toUpperCase()}
-                </button>
-              </span>
-            ))}
-          </div>
-          <NavLink to="/kontakt" state={{ scrollToForm: true }} className="btn btn-gold">
+          {langToggle}
+          <NavLink to="/kontakt" state={{ scrollToForm: true }} className="btn btn-primary">
             {t.cta.reserve}
           </NavLink>
         </div>
