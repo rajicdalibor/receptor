@@ -132,6 +132,7 @@
   border-radius: var(--radius);
   background: var(--cream-card);
   padding: clamp(26px, 3vw, 48px);
+  scroll-margin-top: 92px;
 }
 .epkg-head {
   display: flex;

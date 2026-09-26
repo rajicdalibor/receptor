@@ -120,11 +120,14 @@
 }
 .hevents-prices { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .price-box {
+  display: block;
   border: 1px solid var(--line-cream);
   border-radius: var(--radius);
   padding: 20px 16px;
   background: var(--cream-card);
+  transition: border-color var(--t-fast) var(--ease), transform var(--t-fast) var(--ease);
 }
+.price-box:hover { border-color: var(--burgundy); transform: translateY(-2px); }
 .price-box-label {
   display: block;
   font-size: 0.62rem;

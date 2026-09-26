@@ -1,12 +1,26 @@
+import { useEffect } from "react";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
-import { Link } from "react-router-dom";
-import { PageHero, ReserveBand } from "../components/ui";
+import { Link, useLocation } from "react-router-dom";
+import { PageHero, ReserveBand, slug } from "../components/ui";
 
 export default function Proslave() {
   const { t, lang } = useI18n();
   useReveal([lang]);
   const p = t.proslave;
+  const location = useLocation();
+
+  // When arriving from a home price box, scroll to the chosen package.
+  useEffect(() => {
+    const s = location.state as { scrollTo?: string } | null;
+    if (!s?.scrollTo) return;
+    const id = s.scrollTo;
+    const timer = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 140);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.key]);
 
   return (
     <>
@@ -30,7 +44,7 @@ export default function Proslave() {
         <div className="container">
           <div className="epkgs">
             {p.packages.map((pk) => (
-              <article className="epkg reveal" key={pk.name}>
+              <article className="epkg reveal" key={pk.name} id={slug(pk.name)}>
                 <header className="epkg-head">
                   <div className="epkg-head-main">
                     <span className="epkg-format">{pk.format}</span>

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useI18n } from "../i18n/context";
 import { useReveal } from "../hooks/useReveal";
 import { img } from "../lib/img";
-import { ReserveBand } from "../components/ui";
+import { ReserveBand, slug } from "../components/ui";
 
 export default function Home() {
   const { t, lang } = useI18n();
@@ -88,10 +88,15 @@ export default function Home() {
           </div>
           <div className="hevents-prices reveal">
             {h.events.prices.map((p) => (
-              <div className="price-box" key={p.label}>
+              <Link
+                className="price-box"
+                key={p.label}
+                to="/proslave"
+                state={{ scrollTo: slug(p.label) }}
+              >
                 <span className="price-box-label">{p.label}</span>
                 <span className="price-box-value">{p.value}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
