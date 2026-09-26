@@ -25,21 +25,43 @@ export default function Proslave() {
         </div>
       </section>
 
-      {/* 3 PACKAGES */}
+      {/* EVENT PACKAGES */}
       <section className="section tight" style={{ paddingTop: 0 }}>
         <div className="container">
-          <div className="pkg-grid">
+          <div className="epkgs">
             {p.packages.map((pk) => (
-              <div className="pkg-card reveal" key={pk.name}>
-                <span className="pkg-label">{pk.label}</span>
-                <h3 className="pkg-name">{pk.name}</h3>
-                <span className="pkg-price">{pk.price}</span>
-                <ul className="pkg-list">
-                  {pk.items.map((it) => (
-                    <li key={it}>{it}</li>
+              <article className="epkg reveal" key={pk.name}>
+                <header className="epkg-head">
+                  <div className="epkg-head-main">
+                    <span className="epkg-format">{pk.format}</span>
+                    <h3 className="epkg-name">{pk.name}</h3>
+                    <p className="epkg-desc">{pk.desc}</p>
+                  </div>
+                  <div className="epkg-price-wrap">
+                    <span className="epkg-price">{pk.price}</span>
+                    <span className="epkg-per">{p.perPerson}</span>
+                    <span className="epkg-meta">{pk.meta}</span>
+                  </div>
+                </header>
+                <div className="epkg-groups">
+                  {pk.groups.map((g) => (
+                    <div className="epkg-group" key={g.title}>
+                      <h4 className="epkg-group-title">{g.title}</h4>
+                      <ul className="epkg-list">
+                        {g.items.map((it) => (
+                          <li key={it}>{it}</li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
-              </div>
+                </div>
+                {pk.alt.price && (
+                  <p className="epkg-alt">
+                    <strong>{p.altLabel} — {pk.alt.price} {p.perPerson}</strong> {pk.alt.text}
+                  </p>
+                )}
+                <p className="epkg-note">{pk.note}</p>
+              </article>
             ))}
           </div>
         </div>
